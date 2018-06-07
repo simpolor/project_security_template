@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simpolor.app.repository.TokenRepository">
+
+	<select id="selectToken" parameterType="String" resultType="token"> 
+		SELECT username, series, token, last_used
+		  FROM persistent_logins
+		 WHERE series = #{series} 
+	</select>
+	
+	<insert id="insertToken" parameterType="token"> 
+		INSERT INTO persistent_logins
+		     VALUES (#{username}, #{series}, #{token}, now()) 
+	</insert> 
+	
+	<update id="updateToken" parameterType="token"> 
+		UPDATE persistent_logins
+		   SET token = #{token}, last_used = now()
+		 WHERE series = #{series} 
+	</update>
+	
+	<delete id="deleteToken" parameterType="String"> 
+		DELETE FROM persistent_logins 
+		      WHERE username = #{username} 
+	</delete> 
+
+</mapper>

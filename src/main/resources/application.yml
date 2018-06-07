@@ -1,0 +1,13 @@
+spring:
+  mvc: 
+    view: 
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  datasource: 
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo_db
+    username: demo
+    password: demo
+        
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml

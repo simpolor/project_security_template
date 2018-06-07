@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <!-- <package name="com.simpolor.app.model" />-->
+        <typeAlias alias="demo" type="com.simpolor.app.domain.Demo" />
+        <typeAlias alias="member" type="com.simpolor.app.domain.Member" />
+        <typeAlias alias="memberRole" type="com.simpolor.app.domain.MemberRole" />
+        <typeAlias alias="role" type="com.simpolor.app.domain.Role" />
+        <typeAlias alias="access" type="com.simpolor.app.domain.Access" />
+        <typeAlias alias="token" type="com.simpolor.app.domain.Token" />
+    </typeAliases>
+    
+    
+    <mappers>
+        <mapper resource="mybatis/mapper/demo.xml"/>
+        <mapper resource="mybatis/mapper/member.xml"/>
+        <mapper resource="mybatis/mapper/access.xml"/>
+        <mapper resource="mybatis/mapper/role.xml"/>
+        <mapper resource="mybatis/mapper/token.xml"/>
+    </mappers>
+</configuration>
