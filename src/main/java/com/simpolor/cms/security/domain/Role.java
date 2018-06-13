@@ -1,4 +1,4 @@
-package com.simpolor.cms.module.role.domain;
+package com.simpolor.cms.security.domain;
 
 public class Role{
 

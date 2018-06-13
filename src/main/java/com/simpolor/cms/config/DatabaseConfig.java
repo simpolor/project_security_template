@@ -16,7 +16,7 @@ import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.demo.domain.Demo;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.domain.MemberRole;
-import com.simpolor.cms.module.role.domain.Role;
+import com.simpolor.cms.security.domain.Role;
 import com.simpolor.cms.security.domain.Token;
 
 @Configuration
