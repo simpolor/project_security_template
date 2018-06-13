@@ -1,9 +1,6 @@
 package com.simpolor.cms.module.member.service;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.List;
 
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.domain.MemberRole;
@@ -14,10 +11,7 @@ public interface MemberService {
 	public void addMember(Member member); 
 	public void removeMember(String member_id); 
 	
-	public Collection<GrantedAuthority> getMemberRole(String member_id);
+	public List<MemberRole> getMemberRoleList(String member_id);
 	public void addMemberRole(MemberRole memberRole);
 	public void removeMemberRole(String member_id);
-	
-	public PasswordEncoder passwordEncoder();
-
 }

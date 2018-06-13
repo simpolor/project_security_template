@@ -14,14 +14,16 @@ import org.springframework.stereotype.Service;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.domain.MemberRole;
 import com.simpolor.cms.module.member.repository.MemberRepository;
+import com.simpolor.cms.security.PasswordEncrypt;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	MemberRepository memberRepository;
-	
-	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private MemberRepository memberRepository;
+	 
+	@Autowired
+	private PasswordEncrypt passwordEncrypt;
 	
 	@Override 
 	public Member getMember(String member_id) { 
@@ -33,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override 
 	public void addMember(Member member) { 
 		String memberPwEnc = member.getMember_pw(); 
-		String encodedPassword = passwordEncoder().encode(memberPwEnc); 
+		String encodedPassword = passwordEncrypt.encode(memberPwEnc); 
 		member.setMember_id(encodedPassword);
 		
 		memberRepository.insertMember(member); 
@@ -45,18 +47,8 @@ public class MemberServiceImpl implements MemberService {
 	} 
 	
 	@Override
-	public Collection<GrantedAuthority> getMemberRole(String member_id) {
-		
-		List<MemberRole> memberRoleList = memberRepository.selectMemberRoleList(member_id);
-		
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		if(memberRoleList != null) {
-			for(MemberRole memberRole : memberRoleList) {
-				grantedAuthorities.add(new SimpleGrantedAuthority(memberRole.getMember_role()));
-			}
-		}
-		 
-		return grantedAuthorities;
+	public List<MemberRole> getMemberRoleList(String member_id) {
+		return memberRepository.selectMemberRoleList(member_id); 
 	}
 
 	@Override
@@ -70,9 +62,4 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
-	@Override 
-	public PasswordEncoder passwordEncoder() { 
-		return this.passwordEncoder; 
-	}
-
 }
