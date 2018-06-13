@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.simpolor.cms.security.service.CustomUserDetailsService;
@@ -22,7 +21,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	private String rolePrefix = "ROLE_";
 	
 	@Autowired
-	private CustomPasswordEncoder customPasswordEncoder;
+	private PasswordEncrypt passwordEncrypt;
 	
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
@@ -48,9 +47,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 			logger.info("-- userDetails.getPassword() : {}", userDetails.getPassword());
 			logger.info("-- userDetails.getAuthorities() : {}", userDetails.getAuthorities());
 			
-			logger.info("-- password 비교 : {}", customPasswordEncoder.matches(password, userDetails.getPassword()));
+			logger.info("-- password 비교 : {}", passwordEncrypt.matches(password, userDetails.getPassword()));
 			
-			if(!customPasswordEncoder.matches(password, userDetails.getPassword())) {
+			if(!passwordEncrypt.matches(password, userDetails.getPassword())) {
 				throw new BadCredentialsException("The password does not match.");
 			}
 			

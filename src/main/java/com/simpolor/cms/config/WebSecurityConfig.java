@@ -16,7 +16,7 @@ import com.simpolor.cms.security.CustomAuthenticationProvider;
 import com.simpolor.cms.security.CustomAuthenticationSuccessHandler;
 import com.simpolor.cms.security.CustomLogoutSuccessHandler;
 import com.simpolor.cms.security.CustomPersistentTokenRepository;
-import com.simpolor.cms.security.CustomSecurityInterceptor;
+import com.simpolor.cms.security.SecurityInterceptor;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private CustomAccessDeniedHandler customAccessDeniedHandler;
 	
 	@Autowired // 시큐리티 작업에 대한 인터셉터
-	private CustomSecurityInterceptor customSecurityInterceptor; 
+	private SecurityInterceptor securityInterceptor; 
 	
 	@Autowired
 	private CustomPersistentTokenRepository customPersistentTokenRepository;
@@ -99,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			// 로그아웃 설정
             .and()
             .logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/")
 				.logoutSuccessHandler(customLogoutSuccessHandler)
 		
@@ -110,7 +110,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 			// 필터 설정 (접근할 URL 및 해당 URL에 따른 권한을 확인)
 			.and()
-			.addFilterBefore(customSecurityInterceptor, FilterSecurityInterceptor.class);
+			.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
 	}
 	
 	

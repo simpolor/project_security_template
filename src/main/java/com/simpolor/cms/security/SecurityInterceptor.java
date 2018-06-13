@@ -6,11 +6,11 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomSecurityInterceptor extends FilterSecurityInterceptor{
+public class SecurityInterceptor extends FilterSecurityInterceptor{
 
-	final Logger logger = LoggerFactory.getLogger(CustomSecurityInterceptor.class);
+	final Logger logger = LoggerFactory.getLogger(SecurityInterceptor.class);
 	
-	public CustomSecurityInterceptor(CustomAccessDecisionManager accessDecisionManager,
+	public SecurityInterceptor(CustomAccessDecisionManager accessDecisionManager,
 			CustomFilterInvocationSecurityMetadataSource securityMetadataSource) {
 		
 		logger.info("=========================================================");

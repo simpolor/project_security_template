@@ -5,18 +5,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomPasswordEncoder implements PasswordEncoder {
+public class PasswordEncrypt implements PasswordEncoder {
 
 	private PasswordEncoder passwordEncoder; 
 	
-	public CustomPasswordEncoder() { 
+	public PasswordEncrypt() { 
 		this.passwordEncoder = new BCryptPasswordEncoder(); 
 	}
 	
-	public CustomPasswordEncoder(PasswordEncoder passwordEncoder) { 
+	public PasswordEncrypt(PasswordEncoder passwordEncoder) { 
 		this.passwordEncoder = passwordEncoder; 
 	}
-	
 	
 	@Override
 	public String encode(CharSequence rawPassword) {
