@@ -19,9 +19,9 @@ import org.springframework.security.web.csrf.InvalidCsrfTokenException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAccessDeniedHandler implements AccessDeniedHandler {
+public class DelegatingAccessDeniedHandler implements AccessDeniedHandler {
 
-	final Logger logger = LoggerFactory.getLogger(CustomAccessDeniedHandler.class);
+	final Logger logger = LoggerFactory.getLogger(DelegatingAccessDeniedHandler.class);
 	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	

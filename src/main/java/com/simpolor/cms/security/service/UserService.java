@@ -16,9 +16,9 @@ import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.service.MemberService;
 
 @Component
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
-	final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+	final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	@Autowired
 	private MemberService memberService;

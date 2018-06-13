@@ -10,8 +10,8 @@ public class SecurityInterceptor extends FilterSecurityInterceptor{
 
 	final Logger logger = LoggerFactory.getLogger(SecurityInterceptor.class);
 	
-	public SecurityInterceptor(CustomAccessDecisionManager accessDecisionManager,
-			CustomFilterInvocationSecurityMetadataSource securityMetadataSource) {
+	public SecurityInterceptor(LogicalOrAccessDecisionManager accessDecisionManager,
+			SecurityMetadataSource securityMetadataSource) {
 		
 		logger.info("=========================================================");
 		logger.info("[R] SecurityInterceptor.constructor");

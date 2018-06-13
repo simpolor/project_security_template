@@ -47,7 +47,7 @@ public class DatabaseConfig {
         		Access.class,
         		Token.class
         });
-        sessionFactory.setMapperLocations(resolver.getResources("classpath:/mybatis/mapper/*/*.xml"));
+        sessionFactory.setMapperLocations(resolver.getResources("classpath:/mapper/*/*.xml"));
         //sessionFactory.setConfigLocation(new ClassPathResource("mybatis/mybatis-config.xml"));
         return sessionFactory.getObject();
     }

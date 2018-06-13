@@ -20,9 +20,9 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
-	final Logger logger = LoggerFactory.getLogger(CustomAuthenticationSuccessHandler.class);
+	final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
 	
 	private final static String SECURITY_TARGET_URL = "security_target_url";
 	

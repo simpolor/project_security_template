@@ -16,9 +16,9 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomLogoutSuccessHandler implements LogoutSuccessHandler{
+public class LogoutHandler implements LogoutSuccessHandler{
 
-	final Logger logger = LoggerFactory.getLogger(CustomLogoutSuccessHandler.class);
+	final Logger logger = LoggerFactory.getLogger(LogoutHandler.class);
 	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	

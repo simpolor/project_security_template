@@ -15,9 +15,9 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler{
+public class LoginFailureHandler implements AuthenticationFailureHandler{
 
-	final Logger logger = LoggerFactory.getLogger(CustomAuthenticationFailureHandler.class);
+	final Logger logger = LoggerFactory.getLogger(LoginFailureHandler.class);
 	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	

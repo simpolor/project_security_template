@@ -27,9 +27,9 @@ import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.access.service.AccessService;
 
 @Component
-public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+public class SecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 	
-	final Logger logger = LoggerFactory.getLogger(CustomFilterInvocationSecurityMetadataSource.class);
+	final Logger logger = LoggerFactory.getLogger(SecurityMetadataSource.class);
 	
 	@Autowired
 	private AccessService accessService;

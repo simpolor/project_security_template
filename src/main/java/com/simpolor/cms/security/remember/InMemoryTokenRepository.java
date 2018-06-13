@@ -1,4 +1,4 @@
-package com.simpolor.cms.security;
+package com.simpolor.cms.security.remember;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-public class CustomInMemoryTokenRepository implements PersistentTokenRepository{
+public class InMemoryTokenRepository implements PersistentTokenRepository{
 
 	private final Map<String, PersistentRememberMeToken> seriesTokens = new HashMap<>();
 	

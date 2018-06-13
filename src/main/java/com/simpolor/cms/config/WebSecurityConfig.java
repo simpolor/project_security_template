@@ -10,12 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.simpolor.cms.security.CustomAccessDeniedHandler;
-import com.simpolor.cms.security.CustomAuthenticationFailureHandler;
-import com.simpolor.cms.security.CustomAuthenticationProvider;
-import com.simpolor.cms.security.CustomAuthenticationSuccessHandler;
-import com.simpolor.cms.security.CustomLogoutSuccessHandler;
-import com.simpolor.cms.security.CustomPersistentTokenRepository;
+import com.simpolor.cms.security.DelegatingAccessDeniedHandler;
+import com.simpolor.cms.security.LoginSuccessHandler;
+import com.simpolor.cms.security.LoginFailureHandler;
+import com.simpolor.cms.security.UsernamePasswordProvider;
+import com.simpolor.cms.security.LogoutHandler;
+import com.simpolor.cms.security.remember.RememberMeRepository;
 import com.simpolor.cms.security.SecurityInterceptor;
 
 @Configuration
@@ -23,25 +23,25 @@ import com.simpolor.cms.security.SecurityInterceptor;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 	@Autowired // 로그인에 대한 처리
-	private CustomAuthenticationProvider customAuthenticationProvider; 
+	private UsernamePasswordProvider usernamePasswordProvider; 
 	
 	@Autowired // 로그인 성공에 대한 처리
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private LoginSuccessHandler loginSuccessHandler;
 	
 	@Autowired // 로그인실패에 대한 처리
-    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    private LoginFailureHandler loginFailureHandler;
 	
 	@Autowired // 로그아웃 처리
-	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
+	private LogoutHandler logoutHandler;
 	
 	@Autowired // 접근 권한에 대한 처리
-    private CustomAccessDeniedHandler customAccessDeniedHandler;
+    private DelegatingAccessDeniedHandler accessDeniedHandler;
 	
 	@Autowired // 시큐리티 작업에 대한 인터셉터
 	private SecurityInterceptor securityInterceptor; 
 	
 	@Autowired
-	private CustomPersistentTokenRepository customPersistentTokenRepository;
+	private RememberMeRepository rememberMeRepository;
 	
 	/**
 	 * 스프링 시큐리티의 필터 연결을 설정
@@ -84,8 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginProcessingUrl("/member/login") // 로그인 프로세스 처리할 URL
 				.usernameParameter("member_id")
 				.passwordParameter("member_pw")
-				.successHandler(customAuthenticationSuccessHandler) // 로그인 성공시 이동할 핸들러
-				.failureHandler(customAuthenticationFailureHandler) // 로그인 성공시 이동할 핸들러
+				.successHandler(loginSuccessHandler) // 로그인 성공시 이동할 핸들러
+				.failureHandler(loginFailureHandler) // 로그인 성공시 이동할 핸들러
 		
 			// 비밀번호 자동저장 설정
 			.and()
@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .key("remember-me")
                 .rememberMeParameter("remember-me")
                 //.rememberMeCookieName("remember-me")
-                .tokenRepository(customPersistentTokenRepository)
+                .tokenRepository(rememberMeRepository)
                 .tokenValiditySeconds(86400) // 1일 = 86400초
 		
 			// 로그아웃 설정
@@ -101,12 +101,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/")
-				.logoutSuccessHandler(customLogoutSuccessHandler)
+				.logoutSuccessHandler(logoutHandler)
 		
 			// 예외처리 설정
 			.and()
 			.exceptionHandling()
-				.accessDeniedHandler(customAccessDeniedHandler)
+				.accessDeniedHandler(accessDeniedHandler)
 		
 			// 필터 설정 (접근할 URL 및 해당 URL에 따른 권한을 확인)
 			.and()
@@ -115,7 +115,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(customAuthenticationProvider);
+		auth.authenticationProvider(usernamePasswordProvider);
 	}
 
 }

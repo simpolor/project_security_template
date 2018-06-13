@@ -11,20 +11,18 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.simpolor.cms.security.service.CustomUserDetailsService;
+import com.simpolor.cms.security.service.UserService;
 
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider{
+public class UsernamePasswordProvider implements AuthenticationProvider{
 	
-	final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
-	
-	private String rolePrefix = "ROLE_";
+	final Logger logger = LoggerFactory.getLogger(UsernamePasswordProvider.class);
 	
 	@Autowired
 	private PasswordEncrypt passwordEncrypt;
 	
 	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+	private UserService userService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -41,7 +39,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	
 		UserDetails userDetails;
 		//try {
-			userDetails = customUserDetailsService.loadUserByUsername(username);
+			userDetails = userService.loadUserByUsername(username);
 			
 			logger.info("-- userDetails.getUsername() : {}", userDetails.getUsername());
 			logger.info("-- userDetails.getPassword() : {}", userDetails.getPassword());

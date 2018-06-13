@@ -16,9 +16,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAccessDecisionManager implements AccessDecisionManager {
+public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 
-	final Logger logger = LoggerFactory.getLogger(CustomAccessDecisionManager.class);
+	final Logger logger = LoggerFactory.getLogger(LogicalOrAccessDecisionManager.class);
 	
 	/***
 	 * 사용자의 권한과 매핑정보를 비교하는 함수

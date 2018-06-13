@@ -1,4 +1,4 @@
-package com.simpolor.cms.security;
+package com.simpolor.cms.security.remember;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.simpolor.cms.security.service.TokenService;
 
 @Component
-public class CustomPersistentTokenRepository implements PersistentTokenRepository{
+public class RememberMeRepository implements PersistentTokenRepository{
 
 	@Autowired
 	TokenService tokenService;
