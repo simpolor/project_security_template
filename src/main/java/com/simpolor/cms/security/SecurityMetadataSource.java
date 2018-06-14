@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.access.service.AccessService;
+import com.simpolor.cms.security.adapter.MatcherAdapter;
 
 @Component
 public class SecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
@@ -32,7 +33,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	final Logger logger = LoggerFactory.getLogger(SecurityMetadataSource.class);
 	
 	@Autowired
-	private AccessService accessService;
+	private MatcherAdapter matcherAdapter;
 	
 	private static Map<RequestMatcher, List<ConfigAttribute>> resourceMap = null;
 	
@@ -45,41 +46,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		logger.info("[R] SecurityMetadataSource.init");
 		logger.info("=========================================================");
 		
-		// URL 및 권한 정보를 DB에서 호출
-		List<Access> accessList = accessService.getAccessList();
-		
-		if(accessList != null && !accessList.isEmpty()) {
-			resourceMap = new LinkedHashMap<RequestMatcher, List<ConfigAttribute>>();
-			
-			List<ConfigAttribute> configList;
-			AntPathRequestMatcher accessResource;
-			
-			String accessUrl = null;
-			String prevAccessUrl = null;
-			
-			// URL 및 권한에 따른 매핑 정보를 저장 
-			// (하나의 URL에 따른 여러 권한이 있을 경우에 대한 처리 과정)
-			for(Access access : accessList) {
-				accessUrl = access.getAccess_url();
-				accessResource = new AntPathRequestMatcher(accessUrl);
-				
-				configList = new LinkedList<ConfigAttribute>();
-				
-				if(prevAccessUrl != null && accessUrl.equals(prevAccessUrl)) {
-					List<ConfigAttribute> preAuthList = resourceMap.get(accessResource);
-					Iterator<ConfigAttribute> preAuthItr = preAuthList.iterator();
-					while(preAuthItr.hasNext()){
-						SecurityConfig tempConfig = (SecurityConfig) preAuthItr.next();
-						configList.add(tempConfig);
-	                }
-				}
-				configList.add(new SecurityConfig(access.getAccess_role()));
-				resourceMap.put(accessResource, configList);
-				
-				// 비교를 위한 URL 저장 
-				prevAccessUrl = accessUrl;
-			}
-		}
+		resourceMap = matcherAdapter.getRolesAndUrl();
     }
 	
 	/***
