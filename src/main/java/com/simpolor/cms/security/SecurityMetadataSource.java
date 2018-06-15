@@ -1,31 +1,15 @@
 package com.simpolor.cms.security;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
-
-import com.simpolor.cms.module.access.domain.Access;
-import com.simpolor.cms.module.access.service.AccessService;
-import com.simpolor.cms.security.adapter.MatcherAdapter;
 
 @Component
 public class SecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
@@ -33,34 +17,34 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	final Logger logger = LoggerFactory.getLogger(SecurityMetadataSource.class);
 	
 	@Autowired
-	private MatcherAdapter matcherAdapter;
+	private UrlResourcesMapFactoryBean resourceMap;
 	
-	private static Map<RequestMatcher, List<ConfigAttribute>> resourceMap = null;
+	//private static Map<RequestMatcher, List<ConfigAttribute>> resourceMap = null;
 	
 	/**
 	 * URL 및 권한을 불러와 매핑정보를 저장하는 함수 
 	 */
-	public void init() {
+	/*public void init() {
 		
 		logger.info("=========================================================");
 		logger.info("[R] SecurityMetadataSource.init");
 		logger.info("=========================================================");
 		
 		resourceMap = matcherAdapter.getRolesAndUrl();
-    }
+    }*/
 	
 	/***
 	 * 권한이 수정될 경우 사용하기 위한 함수
 	 */
-	public void reload() {
+	/*public void reload() {
 		
 		logger.info("=========================================================");
 		logger.info("[R] SecurityMetadataSource.reload");
 		logger.info("=========================================================");
 		
-		resourceMap.clear();
-		init();
-	}
+		//resourceMap.clear();
+		//init();
+	}*/
 	
 	/***
 	 * 매핑정보와 요청한 URL이 일치하는지 확인하는 함수
@@ -73,7 +57,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		logger.info("=========================================================");
 		
 		// resourceMap :  {Ant [pattern='/admin/home']=[ADMIN], Ant [pattern .. }
-		if(resourceMap == null) {
+		/*if(resourceMap == null) {
 			init();
 		}
 		
@@ -90,8 +74,10 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 			}
 		}
 		logger.info("-- result : {}", result);
-
-		return result;
+		
+		return result;  */
+		
+		return null;
 	}
 
 	/***
@@ -104,7 +90,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		logger.info("[R] SecurityMetadataSource.getAllConfigAttributes");
 		logger.info("=========================================================");
 		
-		if(resourceMap == null) {
+		/*if(resourceMap == null) {
 			init();
 		}
 		
@@ -112,8 +98,9 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		for (Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet()) {
 			allAttributes.addAll(entry.getValue());
 		}
-		return allAttributes;
+		return allAttributes; */
 		
+		return null;
 	}
 
 	@Override
