@@ -25,19 +25,24 @@ public class MemberServiceImpl implements MemberService {
 		
 		return member; 
 	} 
+
+	@Override
+	public int checkMemberId(String member_id) {
+		return memberRepository.selectMemberId(member_id);
+	}
 	
 	@Override 
-	public void addMember(Member member) { 
+	public int addMember(Member member) { 
 		String memberPwEnc = member.getMember_pw(); 
 		String encodedPassword = passwordEncrypt.encode(memberPwEnc); 
 		member.setMember_id(encodedPassword);
 		
-		memberRepository.insertMember(member); 
+		return memberRepository.insertMember(member); 
 	} 
 	
 	@Override 
-	public void removeMember(String member_id) { 
-		memberRepository.deleteMember(member_id); 
+	public int removeMember(String member_id) { 
+		return memberRepository.deleteMember(member_id); 
 	} 
 	
 	@Override

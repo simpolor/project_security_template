@@ -9,6 +9,12 @@
 		 WHERE member_id = #{member_id} 
 	</select>
 	
+	<select id="selectMemberId" parameterType="String" resultType="int"> 
+		SELECT COUNT(*) 
+		  FROM member 
+		 WHERE member_id = #{member_id} 
+	</select>
+	
 	<insert id="insertMember" parameterType="member"> 
 		INSERT INTO member (member_id, member_pw, member_name, member_email) 
 		     VALUES (#{member_id}, #{member_pw}, #{member_name}, #{member_email}) 

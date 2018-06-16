@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.simpolor.cms.common.util.StringUtil;
+import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.service.MemberService;
 
 @Controller
@@ -18,7 +20,7 @@ public class MemberController {
 	final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	MemberService userService;
+	MemberService memberService;
 	
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String memberLogin(HttpServletRequest request) {
@@ -33,20 +35,6 @@ public class MemberController {
 		
 		return "module/member/memberLogin";
 	}
-
-	@RequestMapping(value="/member/home", method=RequestMethod.GET)
-	public ModelAndView memberHome(HttpServletRequest request) {
-		
-		
-		System.out.println("==================");
-		System.out.println("memberHome");
-		System.out.println("==================");
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("module/member/memberHome");
-		
-		return mav;
-	}
 	
 	@RequestMapping( value="/member/join", method=RequestMethod.GET)
 	public ModelAndView memberJoinForm(HttpServletRequest request) {
@@ -58,15 +46,39 @@ public class MemberController {
 	}
 	
 	@RequestMapping( value="/member/join", method=RequestMethod.POST)
-	public ModelAndView memberJoin(HttpServletRequest request) {
+	public ModelAndView memberJoin(HttpServletRequest request, Member member) {
+		
+		String memberId = member.getMember_id();
+		String memberPw = member.getMember_pw();
+		String memberPwConfirm = member.getMember_pw_confirm();
+		String memberName = member.getMember_name();
+		String memberEmail = member.getMember_email();
+
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("module/member/memberJoin");
+		if(StringUtil.isEmpty(memberId) || StringUtil.isEmpty(memberPw) || StringUtil.isEmpty(memberPwConfirm) || StringUtil.isEmpty(memberName) || StringUtil.isEmpty(memberEmail)) {
+			mav.setViewName("/member/join");
+			return mav;
+		}
 		
+		System.out.println("StringUtil.isEquals(memberPw, memberPwConfirm) : "+StringUtil.isEquals(memberPw, memberPwConfirm));
+		if(StringUtil.isEquals(memberPw, memberPwConfirm)) {
+			System.out.println("memberService.checkMemberId(memberId) : "+memberService.checkMemberId(memberId));
+			if(memberService.checkMemberId(memberId) > 0) {
+				int result = memberService.addMember(member);
+				System.out.println("result : "+result);
+				if(result > 0) {
+					mav.setViewName("redirect:/member/joinComplete");
+					return mav;
+				}
+			}
+		}
+		
+		mav.setViewName("/member/join");
 		return mav;
 	}
 	
-	@RequestMapping( value="/member/complete", method=RequestMethod.GET)
+	@RequestMapping( value="/member/joinComplete", method=RequestMethod.GET)
 	public ModelAndView memberComplete(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();

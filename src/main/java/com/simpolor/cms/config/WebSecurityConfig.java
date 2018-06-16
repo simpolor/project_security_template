@@ -1,6 +1,7 @@
 package com.simpolor.cms.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -61,20 +62,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http
-			// Cross site request forgery (사이트간 요청 위조 [사용 권장] )
-			//.csrf().disable()
-			
 			// URL에 따른 권한 체크 
 			.authorizeRequests()
-				.antMatchers("/", "/index").permitAll()
-				.antMatchers("/reload").permitAll()
-				.antMatchers("/member/login").permitAll()
-				.antMatchers("/member/add").permitAll()
-				//.antMatchers("/member/**").hasAnyAuthority("USER")
-				//.antMatchers("/admin/login").permitAll()
-				//.antMatchers("/admin/security").authenticated()
-				//.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
-				//.antMatchers("/admin/**").hasRole("ADMIN") // Role은 앞에 "ROlE_" 권한이 붙음
+				.antMatchers("/", "/index", "/main", "/main/index").permitAll()
+				.antMatchers("/member/join").permitAll()
+				.antMatchers("/member/complete").permitAll()
 				.anyRequest().authenticated()
 			
 			// 로그인 설정

@@ -11,8 +11,9 @@ import com.simpolor.cms.module.member.domain.MemberRole;
 public interface MemberRepository {
 
 	public Member selectMember(String member_id);
-	public void insertMember(Member member); 
-	public void deleteMember(String member_id); 
+	public int selectMemberId(String member_id);
+	public int insertMember(Member member); 
+	public int deleteMember(String member_id); 
 	
 	public List<MemberRole> selectMemberRoleList(String member_id);
 	public void insertMemberRole(MemberRole memberRole);

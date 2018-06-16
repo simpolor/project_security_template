@@ -4,6 +4,7 @@ public class Member{
 
 	private String member_id;
 	private String member_pw;
+	private String member_pw_confirm;
 	private String member_name;
 	private String member_email;
 	
@@ -18,6 +19,12 @@ public class Member{
 	}
 	public void setMember_pw(String member_pw) {
 		this.member_pw = member_pw;
+	}
+	public String getMember_pw_confirm() {
+		return member_pw_confirm;
+	}
+	public void setMember_pw_confirm(String member_pw_confirm) {
+		this.member_pw_confirm = member_pw_confirm;
 	}
 	public String getMember_name() {
 		return member_name;

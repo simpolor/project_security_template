@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -14,14 +16,21 @@ import org.springframework.stereotype.Component;
 
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.access.service.AccessService;
+import com.simpolor.cms.security.SecurityMetadataSource;
 
 @Component
-public class MatcherAdapter {
+public class SecureObjectAdapter {
+	
+	final Logger logger = LoggerFactory.getLogger(SecureObjectAdapter.class);
 	
 	@Autowired
 	private AccessService accessService;
 	
 	public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getRolesAndUrl(){
+
+		logger.info("=========================================================");
+		logger.info("[R] MatcherAdapter.getRolesAndUrl");
+		logger.info("=========================================================");
 		
 		LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourceMap = new LinkedHashMap<RequestMatcher, List<ConfigAttribute>>();
 		
