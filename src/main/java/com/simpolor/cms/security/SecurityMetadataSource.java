@@ -1,5 +1,6 @@
 package com.simpolor.cms.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -70,21 +72,32 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 			init();
 		}
 		
-		Collection<ConfigAttribute> result = null;
+		// Collection<ConfigAttribute> configAttributes  = null;
+		//Collection<ConfigAttribute> configAttributes = new ArrayList<ConfigAttribute>();
 		
-		HttpServletRequest request = ( ( FilterInvocation ) object ).getRequest();
+		HttpServletRequest request = ((FilterInvocation)object).getRequest();
+		String httpUrl = request.getRequestURI();
+		String httpMethod = request.getMethod().toUpperCase();
 	
 		logger.info("-- request.getRequestURI : {}", request.getRequestURI());
+		logger.info("-- request.getRequestURI() : {}", httpUrl);
+		logger.info("-- request.getMethod*( : {}", httpMethod);
+		
 		for( Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet() ) {
 			// entry.getKey() : Ant [pattern='/admin/home']
+			logger.info("-- entry.getKey() : "+entry.getKey());
 			if(entry.getKey().matches(request)){
-				result = entry.getValue();
-				break;
+				logger.info("-- entry.getValue() : "+entry.getValue());
+				//configAttributes  = entry.getValue();
+				//break;
+				return entry.getValue();
 			}
 		}
-		logger.info("-- result : {}", result);
+		//logger.info("-- configAttributes  : {}", configAttributes );
 		
-		return result;
+		//return SecurityConfig.createList("DEFAULT");
+		//return configAttributes ;
+		return null;
 	}
 
 	/***
@@ -97,7 +110,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		logger.info("[R] SecurityMetadataSource.getAllConfigAttributes");
 		logger.info("=========================================================");
 		
-		if(resourceMap == null) {
+		/*if(resourceMap == null) {
 			init();
 		}
 		
@@ -105,7 +118,8 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		for (Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet()) {
 			allAttributes.addAll(entry.getValue());
 		}
-		return allAttributes;
+		return allAttributes;*/
+		return null;
 	}
 
 	@Override
@@ -115,8 +129,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		logger.info("[R] SecurityMetadataSource.supports");
 		logger.info("=========================================================");
 		
-		//return FilterInvocation.class.isAssignableFrom(clazz);
-		return true;
+		return FilterInvocation.class.isAssignableFrom(clazz);
 	}
 
 	

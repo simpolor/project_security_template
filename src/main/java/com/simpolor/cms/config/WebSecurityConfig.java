@@ -72,18 +72,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			// URL에 따른 권한 체크 
 			.authorizeRequests()
-				.antMatchers("/", "/index", "/main", "/main/index").permitAll()
-				.antMatchers("/member/login").permitAll()
-				// .antMatchers("/member/**").permitAll()
-				/*.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-		            public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-		                fsi.setSecurityMetadataSource(securityMetadataSource);
-		                fsi.setAccessDecisionManager(accessDecisionManager);
-		                return fsi;
-		            }
-				}) */
+//				.antMatchers("/", "/index", "/main", "/main/index").permitAll()
+//				.antMatchers("/member/login").permitAll()
 				.anyRequest().authenticated()
-			
+				
 			// 로그인 설정
 			.and() 
 			.formLogin()
@@ -113,11 +105,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			// 예외처리 설정
 			.and()
 			.exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler);
+				.accessDeniedHandler(accessDeniedHandler)
 		
 			// 필터 설정 (접근할 URL 및 해당 URL에 따른 권한을 확인)
-			// .and()
-			// .addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
+			.and()
+			.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
 	}
 	
 	

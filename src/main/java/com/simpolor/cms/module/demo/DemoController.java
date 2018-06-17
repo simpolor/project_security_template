@@ -50,4 +50,36 @@ public class DemoController {
 		return mav;
 	}
 	
+	@RequestMapping("/demo1")
+	public String demo1() {
+		
+		System.out.println("demo count : "+demoService.findAllCount());
+		
+		Demo demo = demoService.findByDemo(1);
+		if(demo != null) {
+			System.out.println("seq : "+demo.getSeq());
+			System.out.println("name : "+demo.getName());
+			System.out.println("age : "+demo.getAge());
+			System.out.println("hobby : "+demo.getHobby());
+		}
+		
+		return "module/demo/demo";
+	}
+	
+	@RequestMapping("/demo2")
+	public String demo2() {
+		
+		System.out.println("demo count : "+demoService.findAllCount());
+		
+		Demo demo = demoService.findByDemo(1);
+		if(demo != null) {
+			System.out.println("seq : "+demo.getSeq());
+			System.out.println("name : "+demo.getName());
+			System.out.println("age : "+demo.getAge());
+			System.out.println("hobby : "+demo.getHobby());
+		}
+		
+		return "module/demo/demo";
+	}
+	
 }
