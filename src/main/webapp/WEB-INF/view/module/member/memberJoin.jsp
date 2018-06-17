@@ -13,7 +13,8 @@
 <body>
 	<h1>Memer Joinn</h1>
 
-	<form method="post" action="/member/join"> 
+	<form action="/member/join" method="post"> 
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<table>
 			<tr>
 				<td><label for="member_id">아이디</label></td>

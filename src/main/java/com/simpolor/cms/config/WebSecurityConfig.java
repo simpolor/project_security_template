@@ -3,6 +3,7 @@ package com.simpolor.cms.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,11 +13,13 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.simpolor.cms.security.DelegatingAccessDeniedHandler;
+import com.simpolor.cms.security.LogicalOrAccessDecisionManager;
 import com.simpolor.cms.security.LoginSuccessHandler;
 import com.simpolor.cms.security.LoginFailureHandler;
 import com.simpolor.cms.security.UsernamePasswordProvider;
 import com.simpolor.cms.security.LogoutHandler;
 import com.simpolor.cms.security.remember.RememberMeRepository;
+import com.simpolor.cms.security.SecurityMetadataSource;
 import com.simpolor.cms.security.SecurityInterceptor;
 
 @Configuration
@@ -38,6 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired // 접근 권한에 대한 처리
     private DelegatingAccessDeniedHandler accessDeniedHandler;
 	
+	@Autowired
+	private LogicalOrAccessDecisionManager accessDecisionManager;
+	
+	@Autowired
+	private SecurityMetadataSource securityMetadataSource;
+	
 	@Autowired // 시큐리티 작업에 대한 인터셉터
 	private SecurityInterceptor securityInterceptor; 
 	
@@ -53,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		// 필터 적용을 제외할 URL 
 		web.ignoring().antMatchers("/resources/**");
 		web.ignoring().antMatchers("/css/**", "/script/**", "/image/**", "/fonts/**");
-		web.ignoring().antMatchers("/demo/**");
 	}
 	
 	/**
@@ -65,12 +73,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			// URL에 따른 권한 체크 
 			.authorizeRequests()
 				.antMatchers("/", "/index", "/main", "/main/index").permitAll()
-				.antMatchers("/member/join").permitAll()
-				.antMatchers("/member/complete").permitAll()
+				.antMatchers("/member/login").permitAll()
+				// .antMatchers("/member/**").permitAll()
+				/*.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+		            public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
+		                fsi.setSecurityMetadataSource(securityMetadataSource);
+		                fsi.setAccessDecisionManager(accessDecisionManager);
+		                return fsi;
+		            }
+				}) */
 				.anyRequest().authenticated()
 			
 			// 로그인 설정
-			.and()
+			.and() 
 			.formLogin()
 				.loginPage("/member/login") // 로그인 페이지 ( 컨트롤러를 매핑하지 않으면 기본 제공 로그인 페이지 호출 )
 				.loginProcessingUrl("/member/login") // 로그인 프로세스 처리할 URL
@@ -98,11 +113,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			// 예외처리 설정
 			.and()
 			.exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler)
+				.accessDeniedHandler(accessDeniedHandler);
 		
 			// 필터 설정 (접근할 URL 및 해당 URL에 따른 권한을 확인)
-			.and()
-			.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
+			// .and()
+			// .addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
 	}
 	
 	

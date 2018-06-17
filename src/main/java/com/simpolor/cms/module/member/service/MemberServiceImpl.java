@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	public int addMember(Member member) { 
 		String memberPwEnc = member.getMember_pw(); 
 		String encodedPassword = passwordEncrypt.encode(memberPwEnc); 
-		member.setMember_id(encodedPassword);
+		member.setMember_pw(encodedPassword);
 		
 		return memberRepository.insertMember(member); 
 	} 

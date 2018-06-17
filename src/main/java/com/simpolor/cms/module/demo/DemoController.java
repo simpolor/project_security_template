@@ -28,7 +28,7 @@ public class DemoController {
 			System.out.println("hobby : "+demo.getHobby());
 		}
 		
-		return "demo";
+		return "module/demo/demo";
 	}
 	
 	@RequestMapping("/demo/{seq}")
@@ -45,7 +45,7 @@ public class DemoController {
 			mav.addObject("demo", demo);
 		}
 		
-		mav.setViewName("demo");
+		mav.setViewName("module/demo/demo");
 		
 		return mav;
 	}

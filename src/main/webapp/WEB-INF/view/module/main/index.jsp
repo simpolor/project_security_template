@@ -15,6 +15,8 @@
 	
 	<a href="/member/login">로그인</a>
 	<a href="/member/join">회원가입</a>
+	<a href="/member/info">회원정보</a>
+	<a href="/demo">데모</a>
 	
 	<a href="/member/logout">로그아웃</a>
 </body>
