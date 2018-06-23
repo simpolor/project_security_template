@@ -41,12 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired // 접근 권한에 대한 처리
     private DelegatingAccessDeniedHandler accessDeniedHandler;
 	
-	@Autowired
-	private LogicalOrAccessDecisionManager accessDecisionManager;
-	
-	@Autowired
-	private SecurityMetadataSource securityMetadataSource;
-	
 	@Autowired // 시큐리티 작업에 대한 인터셉터
 	private SecurityInterceptor securityInterceptor; 
 	
@@ -72,8 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			// URL에 따른 권한 체크 
 			.authorizeRequests()
-//				.antMatchers("/", "/index", "/main", "/main/index").permitAll()
-//				.antMatchers("/member/login").permitAll()
+				// .antMatchers("/", "/index", "/main", "/main/index").permitAll()
+				// .antMatchers("/member/login").permitAll()
 				.anyRequest().authenticated()
 				
 			// 로그인 설정

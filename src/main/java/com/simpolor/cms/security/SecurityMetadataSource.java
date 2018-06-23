@@ -17,6 +17,7 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
@@ -96,7 +97,9 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		//logger.info("-- configAttributes  : {}", configAttributes );
 		
 		//return SecurityConfig.createList("DEFAULT");
+		// return SecurityConfig.createList("isAuthenticated()");
 		//return configAttributes ;
+		RequestMatcher anyRequest = AnyRequestMatcher.INSTANCE;
 		return null;
 	}
 
