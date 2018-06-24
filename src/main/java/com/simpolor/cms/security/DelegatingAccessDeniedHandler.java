@@ -45,7 +45,8 @@ public class DelegatingAccessDeniedHandler implements AccessDeniedHandler {
 		
 		// 권한에 따른 접근권한 처리
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("-- auth.getName() : {}", authentication.getName());
+		logger.info("-- authentication.isAuthenticated() : "+authentication.isAuthenticated());
+		logger.info("-- authentication.getName() : {}", authentication.getName());
     	for (GrantedAuthority auth : authentication.getAuthorities()) {
     		logger.info("-- auth.getAuthority() : {}", auth.getAuthority());
     		//if (auth.getAuthority().equalsIgnoreCase("USER")) {

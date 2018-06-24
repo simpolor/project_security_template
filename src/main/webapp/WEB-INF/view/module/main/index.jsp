@@ -13,11 +13,11 @@
 <body>
 	<h1>Welcome</h1>
 	
-	<a href="/member/login">로그인</a>
-	<a href="/member/join">회원가입</a>
-	<a href="/member/info">회원정보</a>
-	<a href="/demo">데모</a>
+	<a href="/member/login">로그인</a><br />
+	<a href="/member/join">회원가입</a><br />
+	<a href="/member/info">회원정보</a><br />
+	<a href="/demo">데모</a><br /><br />
 	
-	<a href="/member/logout">로그아웃</a>
+	<a href="/member/logout">로그아웃</a><br />
 </body>
 </html>

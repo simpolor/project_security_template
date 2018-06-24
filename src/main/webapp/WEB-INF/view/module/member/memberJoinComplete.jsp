@@ -9,8 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Memer Join Complete</title>
+<script>
+	function f_move( url ){
+		location.href = url;
+	}
+</script>
 </head>
 <body>
 	<h1>Memer Join Complete</h1>
+	
+	<button onclick="f_move('${pageContext.request.contextPath}/index')">메인으로</button>
 </body>
 </html>

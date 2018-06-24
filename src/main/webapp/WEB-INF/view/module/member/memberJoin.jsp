@@ -9,11 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Memer Join</title>
+<script>
+	function f_submit(){
+		document.getElementById("memberJoinForm").submit();
+	}
+	
+	function f_move( url ){
+		location.href = url;
+	}
+</script>
 </head>
 <body>
 	<h1>Memer Joinn</h1>
 
-	<form action="/member/join" method="post"> 
+	<form id="memberJoinForm" action="/member/join" method="post"> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<table>
 			<tr>
@@ -37,8 +46,9 @@
 				<td><input type="text" name="member_email" id="member_email" placeholder="이메일" required /></td>
 			</tr>
 		</table>
-	 	<button type="submit">회원가입</button>
-	</form> 
+	</form>
+	<button onclick="f_submit()">회원가입</button>
+	<button onclick="f_move('${pageContext.request.contextPath}/index')">뒤로가기</button>
 	<hr> 
 </body>
 </html>
