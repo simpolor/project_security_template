@@ -18,6 +18,8 @@
 <body>
 	<h1>Memer Join Complete</h1>
 	
-	<button onclick="f_move('${pageContext.request.contextPath}/index')">메인으로</button>
+	<hr />
+	
+	<button onclick="f_move('${pageContext.request.contextPath}/index')">홈으로</button>
 </body>
 </html>

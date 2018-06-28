@@ -51,9 +51,10 @@
 		</tbody>	
 	</table>
 	
+	<hr> 
+	
 	<button onclick="f_move('${pageContext.request.contextPath}/access/register')">등록</button>
 	<button onclick="f_move('${pageContext.request.contextPath}/index')">뒤로가기</button>
 	
-	<hr> 
 </body>
 </html>

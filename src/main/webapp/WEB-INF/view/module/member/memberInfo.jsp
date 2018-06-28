@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Memer Info</title>
+<script>
+	function f_move( url ){
+		location.href = url;
+	}
+</script>
 </head>
 <body>
 	<h1>Memer Info</h1>
@@ -31,6 +36,10 @@
 			<td>${Member.member_email}</td>
 		</tr>
 	</table>
-	<hr> 
+	
+	<hr>
+	
+	<button onclick="f_move('${pageContext.request.contextPath}/index')">홈으로</button>
+	 
 </body>
 </html>

@@ -52,6 +52,9 @@ public class SecureObjectAdapter {
 				accessUrl = access.getAccess_url();
 				accessResource = new AntPathRequestMatcher(accessUrl);
 				
+				System.out.println("accessUrl : "+access.getAccess_url());
+				System.out.println("accessRole : "+access.getAccess_role());
+				
 				configList = new LinkedList<ConfigAttribute>();
 				
 				if(prevAccessUrl != null && accessUrl.equals(prevAccessUrl)) {

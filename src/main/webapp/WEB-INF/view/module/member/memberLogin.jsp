@@ -8,12 +8,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>custom login</title>
+<title>Member Login</title>
+<script>
+	function f_submit(){
+		document.getElementById("memberLoginForm").submit();
+	}
+	
+	function f_move( url ){
+		location.href = url;
+	}
+</script>
 </head>
 <body>
-	<h1>custom login</h1>
+	<h1>Member Login</h1>
 
-	<form method="post" action="/member/login"> 
+	<form id="memberLoginForm" method="post" action="/member/login"> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<input type="hidden" name="target_url" value="/member/register"/> 
 		<table>
@@ -31,14 +40,17 @@
 				</td>
 			</tr>
 		</table>
-	 	<button type="submit" class="btn btn-default">로그인</button>
 	</form> 
+	
 	<hr> 
-	<div> 
-		<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-			<span class="text-danger"><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/></span> 
-			<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
-		</c:if> 
-	</div> 
+	
+	<button onclick="f_submit()">로그인</button>
+	<button onclick="f_move('${pageContext.request.contextPath}/index')">홈으로</button>
+	
+	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+		<hr> 
+		<span class="text-danger"><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/></span> 
+		<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+	</c:if> 
 </body>
 </html>
