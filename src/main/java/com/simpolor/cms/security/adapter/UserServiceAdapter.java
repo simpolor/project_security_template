@@ -47,14 +47,14 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	public Collection<GrantedAuthority> getGrantedAuthorities(String username) {
 		
-		List<MemberRole> memberRoleList = memberService.getMemberRoleList(username);
+		MemberRole memberRole = memberService.getMemberRole(username);
 			
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		if(memberRoleList != null) {
+		/*if(memberRoleList != null) {
 			for(MemberRole memberRole : memberRoleList) {
 				grantedAuthorities.add(new SimpleGrantedAuthority(memberRole.getMember_role()));
 			}
-		}
+		}*/
 		return grantedAuthorities;
 	}
 	

@@ -30,7 +30,7 @@
 				<td><input type="text" name="member_id" id="member_id" placeholder="아이디" required /></td>
 			</tr>
 			<tr>
-				<td><label for="member_pw">비밀번호</label></td>
+				<td><label for="member_pw">접근URL</label></td>
 				<td><input type="password" name="member_pw" id="member_pw" placeholder="비밀번호" required /></td>
 			</tr>
 		</table>

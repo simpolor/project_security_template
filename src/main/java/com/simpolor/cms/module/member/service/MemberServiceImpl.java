@@ -46,8 +46,8 @@ public class MemberServiceImpl implements MemberService {
 	} 
 	
 	@Override
-	public List<MemberRole> getMemberRoleList(String member_id) {
-		return memberRepository.selectMemberRoleList(member_id); 
+	public MemberRole getMemberRole(String member_id) {
+		return memberRepository.selectMemberRole(member_id); 
 	}
 
 	@Override
