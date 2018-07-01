@@ -41,9 +41,13 @@ public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 		// 반복문을 실행하는 이유는 한 사용자가 여러 권한을 소유할 수 있기 때문
 		while(cas.hasNext()) {
 			ConfigAttribute ca = cas.next();
+			
 			String role = ((SecurityConfig) ca).getAttribute(); // 사용자 권한을 가져옴
+			logger.info("-- abc role : {}", role);
+			logger.info("-- authentication.getName() : {}", authentication.getName());
 			
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
+				logger.info("-- abc ga.getAuthority() : {}", ga.getAuthority());
 				if (role.trim().equals(ga.getAuthority().trim())) { // 사용자 권한과 매핑정보를 비교
 					
 					logger.info("-- role : {}", role.trim());

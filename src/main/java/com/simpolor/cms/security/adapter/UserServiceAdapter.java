@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import com.simpolor.cms.common.util.StringUtil;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.domain.MemberRole;
 import com.simpolor.cms.module.member.service.MemberService;
@@ -50,11 +51,15 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 		MemberRole memberRole = memberService.getMemberRole(username);
 			
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		/*if(memberRoleList != null) {
-			for(MemberRole memberRole : memberRoleList) {
-				grantedAuthorities.add(new SimpleGrantedAuthority(memberRole.getMember_role()));
+		logger.info("-- memberRole.getMember_role() : "+memberRole.getMember_role());
+		if(!StringUtil.isEmpty(memberRole.getMember_role())) {
+			String[] memberRoleList = memberRole.getMember_role().trim().split(",");
+			if(memberRoleList != null) {
+				for(String role : memberRoleList) {
+					grantedAuthorities.add(new SimpleGrantedAuthority(role));
+				}
 			}
-		}*/
+		}
 		return grantedAuthorities;
 	}
 	

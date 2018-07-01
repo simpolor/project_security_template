@@ -26,9 +26,9 @@ public class DatabaseConfig {
     public DataSource dataSource() {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
-        dataSource.setUrl("jdbc:mysql://localhost:3306/demo_db");
-        dataSource.setUsername("demo");
-        dataSource.setPassword("demo");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/security_db");
+        dataSource.setUsername("security");
+        dataSource.setPassword("security");
      
         return dataSource;
     }

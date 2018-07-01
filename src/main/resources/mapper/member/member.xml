@@ -25,7 +25,7 @@
 		      WHERE member_id = #{member_id} 
 	</delete> 
 	
-	<select id="selectMemberRoleList" parameterType="String" resultType="memberRole">
+	<select id="selectMemberRole" parameterType="String" resultType="memberRole">
 		SELECT member_role 
 		  FROM member_role 
 		 WHERE member_id = #{member_id} 
