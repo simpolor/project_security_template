@@ -12,4 +12,14 @@ public interface RoleRepository {
 
 	public List<Role> selectRoleList();
 	
+	public Role selectRole(int role_seq);
+	
+	public int selectRoleCodeCheck(String role_code);
+	
+	public int insertRole(Role role);
+	
+	public int updateRole(Role role);
+	
+	public int deleteRole(Role role);
+	
 }

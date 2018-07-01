@@ -51,15 +51,16 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 		MemberRole memberRole = memberService.getMemberRole(username);
 			
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		logger.info("-- memberRole.getMember_role() : "+memberRole.getMember_role());
-		if(!StringUtil.isEmpty(memberRole.getMember_role())) {
-			String[] memberRoleList = memberRole.getMember_role().trim().split(",");
+		if(!StringUtil.isEmpty(memberRole.getMember_roles())) {
+			String[] memberRoleList = memberRole.getMember_roles().split(",");
 			if(memberRoleList != null) {
 				for(String role : memberRoleList) {
-					grantedAuthorities.add(new SimpleGrantedAuthority(role));
+					logger.info("-- role : "+role.trim());
+					grantedAuthorities.add(new SimpleGrantedAuthority(role.trim()));
 				}
 			}
 		}
+		
 		return grantedAuthorities;
 	}
 	

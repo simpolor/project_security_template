@@ -3,6 +3,13 @@
 
 <mapper namespace="com.simpolor.cms.module.member.repository.MemberRepository">
 
+	<select id="selectMemberList" resultType="member"> 
+		SELECT member_id, member_name, member_email, regi_date, modi_date, del_yn 
+		  FROM member
+		 WHERE del_yn='N'
+	  ORDER BY member_id ASC
+	</select>
+	
 	<select id="selectMember" parameterType="String" resultType="member"> 
 		SELECT * 
 		  FROM member 

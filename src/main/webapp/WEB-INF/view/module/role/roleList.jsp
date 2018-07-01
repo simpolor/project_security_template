@@ -8,7 +8,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Access List</title>
+<title>Role List</title>
 <script>
 	function f_move( url ){
 		location.href = url;
@@ -16,14 +16,14 @@
 </script>
 </head>
 <body>
-	<h1>Access List</h1>
+	<h1>Role List</h1>
 
 	<table>
 		<thead>
 			<tr>
 				<th>Seq</th>
-				<th>Access URL</th>
-				<th>Access Roles</th>
+				<th>Role Code</th>
+				<th>Role Name</th>
 				<th>Regi Date</th>
 				<th>Modi Date</th>
 				<th></th>
@@ -33,16 +33,16 @@
 		
 		<tbody>
 			<c:choose>
-				<c:when test="${! empty accessList}">
-					<c:forEach var="list" items="${accessList}">
+				<c:when test="${! empty roleList}">
+					<c:forEach var="list" items="${roleList}">
 						<tr>
-							<td>${list.access_seq}</td>
-							<td>${list.access_url}</td>
-							<td>${list.access_roles}</td>
+							<td>${list.role_seq}</td>
+							<td>${list.role_code}</td>
+							<td>${list.role_name}</td>
 							<td>${list.regi_date}</td>
 							<td>${list.modi_date}</td>
-							<td><button onclick="f_move('${pageContext.request.contextPath}/access/modify/${list.access_seq}')">수정</button></td>
-							<td><button onclick="f_move('${pageContext.request.contextPath}/access/delete/${list.access_seq}')">삭제</button></td>
+							<td><button onclick="f_move('${pageContext.request.contextPath}/role/modify/${list.role_seq}')">수정</button></td>
+							<td><button onclick="f_move('${pageContext.request.contextPath}/role/delete/${list.role_seq}')">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -57,7 +57,7 @@
 	
 	<hr> 
 	
-	<button onclick="f_move('${pageContext.request.contextPath}/access/register')">등록</button>
+	<button onclick="f_move('${pageContext.request.contextPath}/role/register')">등록</button>
 	<button onclick="f_move('${pageContext.request.contextPath}/index')">뒤로가기</button>
 	
 </body>

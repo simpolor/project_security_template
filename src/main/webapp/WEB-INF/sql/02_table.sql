@@ -19,7 +19,7 @@ CREATE TABLE `member` (
 
 CREATE TABLE `member_role` (
 	`member_id` VARCHAR(20) NOT NULL,
-	`member_role` VARCHAR(50) NOT NULL,
+	`member_roles` VARCHAR(50) NOT NULL,
 	`regi_id` VARCHAR(20) NULL DEFAULT NULL,
 	`regi_name` VARCHAR(50) NULL DEFAULT NULL,
 	`regi_date` DATETIME NULL DEFAULT NULL,
@@ -41,24 +41,22 @@ CREATE TABLE `role` (
 	`modi_name` VARCHAR(50) NULL DEFAULT NULL,
 	`modi_date` DATETIME NULL DEFAULT NULL,
 	`del_yn` CHAR(50) NULL DEFAULT 'N',
-	PRIMARY KEY (`role_seq`),
-	UNIQUE INDEX `UNIQUE KEY` (`role_code`)
+	PRIMARY KEY (`role_seq`)
 );
 
 
 CREATE TABLE `access` (
 	`access_seq` INT(11) NOT NULL AUTO_INCREMENT,
 	`access_url` VARCHAR(50) NOT NULL,
-	`access_role` VARCHAR(50) NOT NULL,
+	`access_roles` VARCHAR(50) NOT NULL,
 	`regi_id` VARCHAR(20) NULL DEFAULT NULL,
 	`regi_name` VARCHAR(50) NULL DEFAULT NULL,
 	`regi_date` DATETIME NULL DEFAULT NULL,
-	`modo_id` VARCHAR(20) NULL DEFAULT NULL,
+	`modi_id` VARCHAR(20) NULL DEFAULT NULL,
 	`modi_name` VARCHAR(50) NULL DEFAULT NULL,
 	`modi_date` DATETIME NULL DEFAULT NULL,
 	`del_yn` CHAR(50) NULL DEFAULT 'N',
-	PRIMARY KEY (`access_seq`),
-	UNIQUE INDEX `UNIQUE KEY` (`access_url`)
+	PRIMARY KEY (`access_seq`)
 );
 
 

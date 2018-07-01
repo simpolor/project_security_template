@@ -82,7 +82,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	
 		logger.info("-- request.getRequestURI : {}", request.getRequestURI());
 		logger.info("-- request.getRequestURI() : {}", httpUrl);
-		logger.info("-- request.getMethod*( : {}", httpMethod);
+		logger.info("-- request.getMethod : {}", httpMethod);
 		
 		for( Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet() ) {
 			// entry.getKey() : Ant [pattern='/admin/home']

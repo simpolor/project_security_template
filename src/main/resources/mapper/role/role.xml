@@ -4,9 +4,41 @@
 <mapper namespace="com.simpolor.cms.module.role.repository.RoleRepository">
 
 	<select id="selectRoleList" resultType="role"> 
-		SELECT *
+		SELECT role_seq, role_code, role_name, regi_id, regi_name, regi_date, modi_id, modi_id, modi_name, modi_date, del_yn
 		  FROM role
+		 WHERE del_yn='N'
 	  ORDER BY role_seq ASC
 	</select>
+	
+	<select id="selectRole" parameterType="int" resultType="role"> 
+		SELECT role_seq, role_code, role_name, regi_id, regi_name, regi_date, modi_id, modi_id, modi_name, modi_date, del_yn 
+		  FROM role
+		 WHERE role_seq=#{role_seq}
+	</select>
+	
+	<select id="selectRoleCodeCheck" parameterType="String" resultType="int"> 
+		SELECT COUNT(*) 
+		  FROM role
+		 WHERE del_yn='N'
+		   AND role_code=#{role_code}
+		  
+	</select>
+	
+	<insert id="insertRole" parameterType="role">
+		INSERT INTO role (role_code, role_name, regi_id, regi_name, regi_date) 
+		     VALUES (#{role_code}, #{role_name}, #{regi_id}, #{regi_name}, now())
+	</insert>
+	
+	<update id="updateRole" parameterType="role">
+		UPDATE role 
+		   SET role_name=#{role_name}, modi_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now()
+		 WHERE role_seq=#{role_seq}
+	</update>
+	
+	<update id="deleteRole" parameterType="role">
+		UPDATE role
+		   SET modi_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now(), del_yn='Y'
+		 WHERE role_seq=#{role_seq}
+	</update>
 
 </mapper>

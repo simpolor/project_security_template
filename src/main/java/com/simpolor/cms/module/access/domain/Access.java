@@ -4,7 +4,7 @@ public class Access{
 
 	private int access_seq;
 	private String access_url;
-	private String access_role;
+	private String access_roles;
 	private String regi_id;
 	private String regi_name;
 	private String regi_date;
@@ -25,11 +25,11 @@ public class Access{
 	public void setAccess_url(String access_url) {
 		this.access_url = access_url;
 	}
-	public String getAccess_role() {
-		return access_role;
+	public String getAccess_roles() {
+		return access_roles;
 	}
-	public void setAccess_role(String access_role) {
-		this.access_role = access_role;
+	public void setAccess_roles(String access_roles) {
+		this.access_roles = access_roles;
 	}
 	public String getRegi_id() {
 		return regi_id;

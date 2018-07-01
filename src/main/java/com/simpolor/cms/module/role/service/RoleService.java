@@ -15,8 +15,27 @@ public class RoleService {
 	RoleRepository roleRepository;
 
 	public List<Role> getRoleList() {
-		List<Role> list = roleRepository.selectRoleList();
-		return list;
+		return roleRepository.selectRoleList();
+	}
+	
+	public Role getRole(int role_seq) {
+		return roleRepository.selectRole(role_seq);
+	}
+	
+	public int isRoleCode(String role_code) {
+		return roleRepository.selectRoleCodeCheck(role_code);
+	}
+	
+	public int registerRole(Role role) {
+		return roleRepository.insertRole(role);
+	}
+	
+	public int modifyRole(Role role) {
+		return roleRepository.updateRole(role);
+	}
+	
+	public int deleteRole(Role role) {
+		return roleRepository.deleteRole(role);
 	}
 
 }

@@ -16,7 +16,7 @@ public class DemoController {
 	private DemoService demoService;
 
 	@RequestMapping("/demo")
-	public String demo() {
+	public ModelAndView demo(ModelAndView mav) {
 		
 		System.out.println("demo count : "+demoService.findAllCount());
 		
@@ -28,13 +28,14 @@ public class DemoController {
 			System.out.println("hobby : "+demo.getHobby());
 		}
 		
-		return "module/demo/demo";
+		mav.addObject("demo", demo);
+		mav.setViewName("module/demo/demo");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/demo/{seq}")
-	public ModelAndView demo(@PathVariable int seq) {
-		
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView demo(@PathVariable int seq, ModelAndView mav) {
 		
 		Demo demo = demoService.findByDemo(seq);
 		if(demo != null) {
@@ -51,7 +52,7 @@ public class DemoController {
 	}
 	
 	@RequestMapping("/demo1")
-	public String demo1() {
+	public ModelAndView demo1(ModelAndView mav) {
 		
 		System.out.println("demo count : "+demoService.findAllCount());
 		
@@ -61,13 +62,16 @@ public class DemoController {
 			System.out.println("name : "+demo.getName());
 			System.out.println("age : "+demo.getAge());
 			System.out.println("hobby : "+demo.getHobby());
+			mav.addObject("demo", demo);
 		}
 		
-		return "module/demo/demo";
+		mav.setViewName("module/demo/demo");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/demo2")
-	public String demo2() {
+	public ModelAndView demo2(ModelAndView mav) {
 		
 		System.out.println("demo count : "+demoService.findAllCount());
 		
@@ -77,9 +81,12 @@ public class DemoController {
 			System.out.println("name : "+demo.getName());
 			System.out.println("age : "+demo.getAge());
 			System.out.println("hobby : "+demo.getHobby());
+			mav.addObject("demo", demo);
 		}
 		
-		return "module/demo/demo";
+		mav.setViewName("module/demo/demo");
+		
+		return mav;
 	}
 	
 }

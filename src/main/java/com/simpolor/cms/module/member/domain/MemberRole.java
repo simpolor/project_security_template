@@ -3,7 +3,7 @@ package com.simpolor.cms.module.member.domain;
 public class MemberRole{
 
 	private String member_id;
-	private String member_role;
+	private String member_roles;
 	private String regi_id;
 	private String regi_name;
 	private String regi_date;
@@ -18,11 +18,11 @@ public class MemberRole{
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public String getMember_role() {
-		return member_role;
+	public String getMember_roles() {
+		return member_roles;
 	}
-	public void setMember_role(String member_role) {
-		this.member_role = member_role;
+	public void setMember_roles(String member_roles) {
+		this.member_roles = member_roles;
 	}
 	public String getRegi_id() {
 		return regi_id;

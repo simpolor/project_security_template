@@ -53,7 +53,7 @@ public class SecureObjectAdapter {
 				accessResource = new AntPathRequestMatcher(accessUrl);
 				
 				System.out.println("accessUrl : "+access.getAccess_url());
-				System.out.println("accessRole : "+access.getAccess_role());
+				System.out.println("accessRoles : "+access.getAccess_roles());
 				
 				configList = new LinkedList<ConfigAttribute>();
 				
@@ -65,7 +65,7 @@ public class SecureObjectAdapter {
 						configList.add(tempConfig);
 	                }
 				}
-				configList.add(new SecurityConfig(access.getAccess_role()));
+				configList.add(new SecurityConfig(access.getAccess_roles()));
 				resourceMap.put(accessResource, configList);
 				
 				// 비교를 위한 URL 저장 

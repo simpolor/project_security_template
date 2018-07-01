@@ -8,10 +8,10 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Access Register</title>
+<title>Role Register</title>
 <script>
 	function f_submit(){
-		document.getElementById("accessRegisterForm").submit();
+		document.getElementById("roleRegisterForm").submit();
 	}
 	
 	function f_move( url ){
@@ -20,18 +20,18 @@
 </script>
 </head>
 <body>
-	<h1>Access Register</h1>
+	<h1>Role Register</h1>
 
-	<form id="accessRegisterForm" action="/access/register" method="post"> 
+	<form id="roleRegisterForm" action="/role/register" method="post"> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<table>
 			<tr>
-				<td><label for="access_url">ACCESS URL</label></td>
-				<td><input type="text" name="access_url" id="access_url" /></td>
+				<td><label for="role_code">Role Code</label></td>
+				<td><input type="text" name="role_code" id="role_code" /></td>
 			</tr>
 			<tr>
-				<td><label for="access_url">ACCESS ROLES</label></td>
-				<td><input type="text" name="access_roles" id="access_roles" /></td>
+				<td><label for="role_name">Role Name</label></td>
+				<td><input type="text" name="role_name" id="role_name" /></td>
 			</tr>
 		</table>
 	</form>
@@ -39,7 +39,7 @@
 	<hr> 
 	
 	<button onclick="f_submit()">등록</button>
-	<button onclick="f_move('${pageContext.request.contextPath}/access/list')">뒤로가기</button>
+	<button onclick="f_move('${pageContext.request.contextPath}/role/list')">뒤로가기</button>
 	
 </body>
 </html>

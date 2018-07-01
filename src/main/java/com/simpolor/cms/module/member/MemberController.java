@@ -1,5 +1,7 @@
 package com.simpolor.cms.module.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.simpolor.cms.common.util.StringUtil;
+import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.service.MemberService;
 
@@ -24,7 +27,7 @@ public class MemberController {
 	MemberService memberService;
 	
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
-	public String memberLogin(HttpServletRequest request) {
+	public ModelAndView memberLogin(ModelAndView mav, HttpServletRequest request) {
 		
 		String referer = request.getHeader("Referer");
 		logger.info("-- referer : {}", referer);
@@ -34,20 +37,21 @@ public class MemberController {
 			  request.getSession().setAttribute("refererUrl", referer);
 		}
 		
-		return "module/member/memberLogin";
+		mav.setViewName("module/member/memberLogin");
+		
+		return mav;
 	}
 	
 	@RequestMapping( value="/member/join", method=RequestMethod.GET)
-	public ModelAndView memberJoinForm(HttpServletRequest request) {
+	public ModelAndView memberJoinForm(ModelAndView mav) {
 		
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName("module/member/memberJoin");
 		
 		return mav;
 	}
 	
 	@RequestMapping( value="/member/join", method=RequestMethod.POST)
-	public ModelAndView memberJoin(HttpServletRequest request, Member member) {
+	public ModelAndView memberJoin(ModelAndView mav, Member member) {
 
 		System.out.println("/member/join : POST");
 		
@@ -63,7 +67,6 @@ public class MemberController {
 		System.out.println("memberName :"+memberName);
 		System.out.println("memberEmail :"+memberEmail);
 		
-		ModelAndView mav = new ModelAndView();
 		if(StringUtil.isEmpty(memberId) || StringUtil.isEmpty(memberPw) || StringUtil.isEmpty(memberPwConfirm) || StringUtil.isEmpty(memberName) || StringUtil.isEmpty(memberEmail)) {
 			mav.setViewName("module/member/memberJoin");
 			return mav;
@@ -83,26 +86,41 @@ public class MemberController {
 		}
 		
 		mav.setViewName("module/member/memberJoin");
+		
 		return mav;
 	}
 	
 	@RequestMapping( value="/member/joinComplete", method=RequestMethod.GET)
-	public ModelAndView memberComplete(HttpServletRequest request) {
+	public ModelAndView memberComplete(ModelAndView mav) {
 		
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName("module/member/memberJoinComplete");
 		
 		return mav;
 	}
 	
-	@RequestMapping( value="/member/info", method=RequestMethod.GET)
-	public ModelAndView memberInfo(HttpServletRequest request) {
+	@RequestMapping( value="/member/info/{member_id}", method=RequestMethod.GET)
+	public ModelAndView memberInfo(ModelAndView mav, @PathVariable String member_id) {
 		
-		Member member = memberService.getMember("abc");
+		Member member = memberService.getMember(member_id);
 		
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("Member", member);
 		mav.setViewName("module/member/memberInfo");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/member/list")
+	public ModelAndView memberList() {
+		
+		logger.info("-- Member List");
+		
+		List<Member> list = memberService.getMemberList(); 
+		
+		logger.info("-- list.size : "+list.size());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberList", list);
+		mav.setViewName("module/member/memberList");
 		
 		return mav;
 	}

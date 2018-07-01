@@ -15,11 +15,16 @@
 	
 	<a href="/member/login">로그인</a><br />
 	<a href="/member/join">회원가입</a><br />
-	<a href="/member/info">회원정보</a><br />
+	<a href="/member/info/abc">회원정보</a><br />
+	<a href="/member/list">회원목록</a><br />
 	<a href="/access/list">접근관리</a><br />
-
-	<a href="/demo">데모</a><br /><br />
-	
+	<a href="/role/list">권한관리</a><br />
+	<hr />
+	<a href="/demo">데모</a><br />
+	<a href="/demo/1">데모seq</a><br />
+	<a href="/demo1">데모1</a><br />
+	<a href="/demo2">데모2</a><br />
+	<hr />
 	<a href="/member/logout">로그아웃</a><br />
 </body>
 </html>

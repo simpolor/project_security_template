@@ -4,9 +4,40 @@
 <mapper namespace="com.simpolor.cms.module.access.repository.AccessRepository">
 
 	<select id="selectAccessList" resultType="access"> 
-		SELECT *
+		SELECT access_seq, access_url, access_roles, regi_id, regi_name, regi_date, modi_id, modi_id, modi_name, modi_date, del_yn 
 		  FROM access
+		 WHERE del_yn='N'
 	  ORDER BY access_url ASC
 	</select>
+	
+	<select id="selectAccess" parameterType="int" resultType="access"> 
+		SELECT access_seq, access_url, access_roles, regi_id, regi_name, regi_date, modi_id, modi_id, modi_name, modi_date, del_yn 
+		  FROM access
+		 WHERE access_seq=#{access_seq}
+	</select>
+	
+	<select id="selectAccessUrlCheck" parameterType="String" resultType="int"> 
+		SELECT COUNT(*) 
+		  FROM access
+		 WHERE access_url=#{access_url}
+	</select>
+	
+	<insert id="insertAccess" parameterType="access">
+		INSERT INTO access (access_url, access_roles, regi_id, regi_name, regi_date) 
+		     VALUES (#{access_url}, #{access_roles}, #{regi_id}, #{regi_name}, now())
+	</insert>
+	
+	<update id="updateAccess" parameterType="access">
+		UPDATE access 
+		   SET access_roles=#{access_roles}, modi_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now()
+		 WHERE access_seq=#{access_seq}
+	</update>
+	
+	<update id="deleteAccess" parameterType="access">
+		UPDATE access 
+		   SET modi_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now(), del_yn='Y'
+		 WHERE access_seq=#{access_seq}
+	</update>
+	
 
 </mapper>
