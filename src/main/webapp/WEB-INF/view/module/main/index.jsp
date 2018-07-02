@@ -14,7 +14,7 @@
 	<h1>Welcome</h1>
 	
 	<a href="/member/login">로그인</a><br />
-	<a href="/member/join">회원가입</a><br />
+	<a href="/member/register">회원가입</a><br />
 	<a href="/member/info/abc">회원정보</a><br />
 	<a href="/member/list">회원목록</a><br />
 	<a href="/access/list">접근관리</a><br />

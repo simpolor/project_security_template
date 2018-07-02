@@ -14,10 +14,12 @@ public interface MemberRepository {
 	public Member selectMember(String member_id);
 	public int selectMemberId(String member_id);
 	public int insertMember(Member member); 
+	public int updateMember(Member member); 
 	public int deleteMember(String member_id); 
 	
 	public MemberRole selectMemberRole(String member_id);
 	public int insertMemberRole(MemberRole memberRole);
-	public int deleteMemberRole(String member_id);
+	public int updateMemberRole(MemberRole memberRole);
+	public int deleteMemberRole(MemberRole memberRole);
 
 }

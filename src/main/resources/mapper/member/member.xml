@@ -23,14 +23,26 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="member"> 
-		INSERT INTO member (member_id, member_pw, member_name, member_email) 
-		     VALUES (#{member_id}, #{member_pw}, #{member_name}, #{member_email}) 
+		INSERT INTO member (member_id, member_pw, member_name, member_email, regi_date) 
+		     VALUES (#{member_id}, #{member_pw}, #{member_name}, #{member_email}, now()) 
 	</insert> 
 	
-	<delete id="deleteMember" parameterType="String"> 
+	<update id="updateMember" parameterType="member"> 
+		UPDATE member 
+		   SET member_name=#{member_name}, member_email=#{member_email}, modi_date=now() 
+		 WHERE member_id=#{member_id} 
+	</update> 
+	
+	<update id="deleteMember" parameterType="member"> 
+		UPDATE member 
+		   SET modi_date=now(), del_yn='Y'
+		 WHERE member_id=#{member_id} 
+	</update>
+	
+	<!-- <delete id="deleteMember" parameterType="String"> 
 		DELETE FROM member 
 		      WHERE member_id = #{member_id} 
-	</delete> 
+	</delete>  -->
 	
 	<select id="selectMemberRole" parameterType="String" resultType="memberRole">
 		SELECT member_role 
@@ -39,14 +51,26 @@
 	</select>
 	
 	<insert id="insertMemberRole" parameterType="memberRole"> 
-		INSERT INTO member_role (member_id, member_role) 
-		VALUES (#{member_id}, #{member_role}) 
+		INSERT INTO member_role (member_id, member_roles, regi_id, regi_name, regi_date) 
+		VALUES (#{member_id}, #{member_roles}, #{regi_id}, #{regi_name}, now()) 
 	</insert> 
 	
-	<delete id="deleteMemberRole" parameterType="String"> 
+	<update id="updateMemberRole" parameterType="memberRole"> 
+		UPDATE member_role 
+		   SET member_roles=#{member_roles}, moid_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now() 
+		 WHERE member_id=#{member_id} 
+	</update> 
+	
+	<update id="deleteMemberRole" parameterType="memberRole"> 
+		UPDATE member_role 
+		   SET modi_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now(), del_yn='Y'
+		 WHERE member_id=#{member_id} 
+	</update> 
+	
+	<!-- <delete id="deleteMemberRole" parameterType="String"> 
 		DELETE FROM member_role 
 		      WHERE member_id = #{member_id} 
-	</delete> 
+	</delete> --> 
 
 
 </mapper>

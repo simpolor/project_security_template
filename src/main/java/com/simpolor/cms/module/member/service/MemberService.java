@@ -19,17 +19,19 @@ public class MemberService  {
 	@Autowired
 	private PasswordEncrypt passwordEncrypt;
 	
+	public List<Member> getMemberList(){
+		return memberRepository.selectMemberList();
+	}
+	
 	public Member getMember(String member_id) { 
-		Member member = memberRepository.selectMember(member_id);
-		
-		return member; 
+		return memberRepository.selectMember(member_id); 
 	} 
 
 	public int checkMemberId(String member_id) {
 		return memberRepository.selectMemberId(member_id);
 	}
 	
-	public int addMember(Member member) { 
+	public int registerMember(Member member) { 
 		String memberPwEnc = member.getMember_pw(); 
 		String encodedPassword = passwordEncrypt.encode(memberPwEnc); 
 		member.setMember_pw(encodedPassword);
@@ -37,7 +39,11 @@ public class MemberService  {
 		return memberRepository.insertMember(member); 
 	} 
 	
-	public int removeMember(String member_id) { 
+	public int modifyMember(Member member){
+		return memberRepository.updateMember(member);
+	}
+	
+	public int deleteMember(String member_id) { 
 		return memberRepository.deleteMember(member_id); 
 	} 
 	
@@ -45,18 +51,20 @@ public class MemberService  {
 		return memberRepository.selectMemberRole(member_id); 
 	}
 
-	public int addMemberRole(MemberRole memberRole) {
+	public int registerMemberRole(MemberRole memberRole) {
+		return memberRepository.insertMemberRole(memberRole); 
+	}
+	
+	public int modifyMemberRole(MemberRole memberRole) {
 		return memberRepository.insertMemberRole(memberRole); 
 	}
 
-	public int removeMemberRole(String member_id) {
-		return memberRepository.deleteMemberRole(member_id); 
+	public int deleteMemberRole(MemberRole memberRole) {
+		return memberRepository.deleteMemberRole(memberRole); 
 		
 	}
 	
-	public List<Member> getMemberList(){
-		return memberRepository.selectMemberList();
-	}
+	
 	
 	
 }

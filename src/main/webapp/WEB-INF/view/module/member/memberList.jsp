@@ -57,7 +57,6 @@
 	
 	<hr> 
 	
-	<button onclick="f_move('${pageContext.request.contextPath}/member/register')">등록</button>
 	<button onclick="f_move('${pageContext.request.contextPath}/index')">뒤로가기</button>
 	
 </body>

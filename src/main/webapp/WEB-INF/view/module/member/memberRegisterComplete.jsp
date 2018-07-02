@@ -8,7 +8,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Memer Join Complete</title>
+<title>Memer Register Complete</title>
 <script>
 	function f_move( url ){
 		location.href = url;
@@ -16,7 +16,7 @@
 </script>
 </head>
 <body>
-	<h1>Memer Join Complete</h1>
+	<h1>Memer Register Complete</h1>
 	
 	<hr />
 	

@@ -17,6 +17,7 @@ import com.simpolor.cms.common.util.StringUtil;
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.service.MemberService;
+import com.simpolor.cms.module.role.domain.Role;
 
 @Controller
 public class MemberController {
@@ -42,18 +43,18 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping( value="/member/join", method=RequestMethod.GET)
+	@RequestMapping( value="/member/register", method=RequestMethod.GET)
 	public ModelAndView memberJoinForm(ModelAndView mav) {
 		
-		mav.setViewName("module/member/memberJoin");
+		mav.setViewName("module/member/memberRegister");
 		
 		return mav;
 	}
 	
-	@RequestMapping( value="/member/join", method=RequestMethod.POST)
+	@RequestMapping( value="/member/register", method=RequestMethod.POST)
 	public ModelAndView memberJoin(ModelAndView mav, Member member) {
 
-		System.out.println("/member/join : POST");
+		System.out.println("/member/register : POST");
 		
 		String memberId = member.getMember_id();
 		String memberPw = member.getMember_pw();
@@ -68,7 +69,7 @@ public class MemberController {
 		System.out.println("memberEmail :"+memberEmail);
 		
 		if(StringUtil.isEmpty(memberId) || StringUtil.isEmpty(memberPw) || StringUtil.isEmpty(memberPwConfirm) || StringUtil.isEmpty(memberName) || StringUtil.isEmpty(memberEmail)) {
-			mav.setViewName("module/member/memberJoin");
+			mav.setViewName("module/member/memberRegister");
 			return mav;
 		}
 		
@@ -76,35 +77,23 @@ public class MemberController {
 		if(StringUtil.isEquals(memberPw, memberPwConfirm)) {
 			System.out.println("memberService.checkMemberId(memberId) : "+memberService.checkMemberId(memberId));
 			if(memberService.checkMemberId(memberId) == 0) {
-				int result = memberService.addMember(member);
-				System.out.println("result : "+result);
+				int result = memberService.registerMember(member);
 				if(result > 0) {
-					mav.setViewName("redirect:/member/joinComplete");
+					mav.setViewName("redirect:/member/registerComplete");
 					return mav;
 				}
 			}
 		}
 		
-		mav.setViewName("module/member/memberJoin");
+		mav.setViewName("module/member/memberRegister");
 		
 		return mav;
 	}
 	
-	@RequestMapping( value="/member/joinComplete", method=RequestMethod.GET)
+	@RequestMapping( value="/member/registerComplete", method=RequestMethod.GET)
 	public ModelAndView memberComplete(ModelAndView mav) {
 		
-		mav.setViewName("module/member/memberJoinComplete");
-		
-		return mav;
-	}
-	
-	@RequestMapping( value="/member/info/{member_id}", method=RequestMethod.GET)
-	public ModelAndView memberInfo(ModelAndView mav, @PathVariable String member_id) {
-		
-		Member member = memberService.getMember(member_id);
-		
-		mav.addObject("Member", member);
-		mav.setViewName("module/member/memberInfo");
+		mav.setViewName("module/member/memberRegisterComplete");
 		
 		return mav;
 	}
@@ -124,5 +113,56 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	@RequestMapping( value="/member/info/{member_id}", method=RequestMethod.GET)
+	public ModelAndView memberInfo(ModelAndView mav, @PathVariable String member_id) {
+		
+		Member member = memberService.getMember(member_id);
+		
+		mav.addObject("Member", member);
+		mav.setViewName("module/member/memberInfo");
+		
+		return mav;
+	}
+	
+	@RequestMapping( value="/member/modify/{member_id}", method=RequestMethod.GET)
+	public ModelAndView memberModifyForm(ModelAndView mav, @PathVariable String member_id) {
+		
+		Member member = memberService.getMember(member_id);
+		
+		mav.addObject("Member", member);
+		mav.setViewName("module/member/memberModify");
+		
+		return mav;
+	}
+	
+	@RequestMapping( value="/member/modify/{member_id}", method=RequestMethod.POST)
+	public ModelAndView memberModify(ModelAndView mav, @PathVariable String member_id, Member member) {
+		
+		logger.info("-- Member Modify Process");
+		
+		logger.info("> member_id : "+member_id);
+		logger.info("> member_name : "+member.getMember_name());
+		logger.info("> member_email : "+member.getMember_email());
+		
+		member.setMember_id(member_id);
+		if(memberService.modifyMember( member) > 0) mav.setViewName("redirect:/member/list");
+		else mav.setViewName("module/member/memberModify");
+		
+		return mav;
+	}
+	
+	@RequestMapping( value="/member/delete/{member_id}", method=RequestMethod.GET)
+	public ModelAndView memberDelete(ModelAndView mav, @PathVariable String member_id) {
+		
+		logger.info("-- Member Delete Process");
+		
+		if(memberService.deleteMember(member_id) > 0) mav.setViewName("redirect:/member/list");
+		else mav.setViewName("module/member/memberModify");
+		
+		return mav;
+	}
+	
+	
 	
 }

@@ -8,10 +8,10 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Memer Join</title>
+<title>Memer Register</title>
 <script>
 	function f_submit(){
-		document.getElementById("memberJoinForm").submit();
+		document.getElementById("memberRegisterForm").submit();
 	}
 	
 	function f_move( url ){
@@ -20,9 +20,9 @@
 </script>
 </head>
 <body>
-	<h1>Memer Joinn</h1>
+	<h1>Memer Register</h1>
 
-	<form id="memberJoinForm" action="/member/join" method="post"> 
+	<form id="memberRegisterForm" action="/member/register" method="post"> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<table>
 			<tr>
