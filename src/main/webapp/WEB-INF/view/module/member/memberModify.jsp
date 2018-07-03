@@ -43,7 +43,7 @@
 	<hr>
 	
 		<button onclick="f_submit()">수정</button>
-	<button onclick="f_move('${pageContext.request.contextPath}/index')">홈으로</button>
+	<button onclick="f_move('${pageContext.request.contextPath}/list')">뒤로가기</button>
 	 
 </body>
 </html>
