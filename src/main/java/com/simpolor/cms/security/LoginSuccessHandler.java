@@ -36,9 +36,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
     	
-    	logger.info("=========================================================");
-		logger.info("[R] AuthenticationSuccessHandler.onAuthenticationSuccess");
-		logger.info("=========================================================");
+		logger.info("[M] LoginSuccessHandler.onAuthenticationSuccess");
 		
     	// 현재 로그인한 유저의 권한을 확인할 수 있는 부분
     	response.setStatus(HttpServletResponse.SC_OK);
@@ -61,9 +59,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
      */
     public void redirectUrl(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
-    	logger.info("=========================================================");
-		logger.info("[R] AuthenticationSuccessHandler.redirectUrl");
-		logger.info("=========================================================");
+    	logger.info("[M] LoginSuccessHandler.redirectUrl");
 
 		// 로그인 form에서 security_target_url 파라미터를 통한 페이지 호출
 		String targetUrl = request.getParameter(SECURITY_TARGET_URL);

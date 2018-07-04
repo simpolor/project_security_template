@@ -27,9 +27,7 @@ public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)
 			throws AccessDeniedException, InsufficientAuthenticationException {
 		
-		logger.info("=======================================================");
-		logger.info("[R] CustomAccessDeniedManager.decide");
-		logger.info("=======================================================");
+		logger.info("[M] LogicalOrAccessDecisionManager.decide");
 		
 		// 해당 URL에 대한 권한 정보가 없다면 무조건 통과 
 		if (configAttributes == null || configAttributes.size() <= 0) {
@@ -59,9 +57,7 @@ public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 	@Override
 	public boolean supports(ConfigAttribute attribute) {
 
-		logger.info("=======================================================");
-		logger.info("[R] CustomAccessDeniedManager.supports(ConfigAttribute)");
-		logger.info("=======================================================");
+		logger.info("[M] LogicalOrAccessDecisionManager.supports ConfigAttribute");
 
 		return true;
 	}
@@ -69,9 +65,7 @@ public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 	@Override
 	public boolean supports(Class<?> clazz) {
 
-		logger.info("=======================================================");
-		logger.info("[R] CustomAccessDeniedManager.supports(Class)");
-		logger.info("=======================================================");
+		logger.info("[M] LogicalOrAccessDecisionManager.supports clazz");
 		
 		return true;
 	}

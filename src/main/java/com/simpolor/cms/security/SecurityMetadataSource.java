@@ -1,12 +1,9 @@
 package com.simpolor.cms.security;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.AnyRequestMatcher;
@@ -38,9 +34,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	 */
 	public void init() {
 		
-		logger.info("=========================================================");
-		logger.info("[R] SecurityMetadataSource.init");
-		logger.info("=========================================================");
+		logger.info("[M] SecurityMetadataSource.init");
 		
 		resourceMap = secureObjectAdapter.getRolesAndUrl();
     }
@@ -50,9 +44,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	 */
 	public void reload() {
 		
-		logger.info("=========================================================");
-		logger.info("[R] SecurityMetadataSource.reload");
-		logger.info("=========================================================");
+		logger.info("[M] SecurityMetadataSource.reload");
 		
 		resourceMap.clear();
 		init();
@@ -64,9 +56,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
 		
-		logger.info("=========================================================");
-		logger.info("[R] SecurityMetadataSource.getAttributes");
-		logger.info("=========================================================");
+		logger.info("[M] SecurityMetadataSource.getAttributes");
 		
 		// resourceMap :  {Ant [pattern='/admin/home']=[ADMIN], Ant [pattern .. }
 		if(resourceMap == null) {
@@ -109,9 +99,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
 		
-		logger.info("=========================================================");
-		logger.info("[R] SecurityMetadataSource.getAllConfigAttributes");
-		logger.info("=========================================================");
+		logger.info("[M] SecurityMetadataSource.getAllConfigAttributes");
 		
 		/*if(resourceMap == null) {
 			init();
@@ -128,9 +116,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 	@Override
 	public boolean supports(Class<?> clazz) {
 		
-		logger.info("=========================================================");
-		logger.info("[R] SecurityMetadataSource.supports");
-		logger.info("=========================================================");
+		logger.info("[M] SecurityMetadataSource.supports");
 		
 		return FilterInvocation.class.isAssignableFrom(clazz);
 	}

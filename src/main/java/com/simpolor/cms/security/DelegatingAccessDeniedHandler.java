@@ -29,9 +29,7 @@ public class DelegatingAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		
-		logger.info("=========================================================");
-		logger.info("[R] AccessDeniedHandler.handle");
-		logger.info("=========================================================");
+		logger.info("[M] DelegatingAccessDeniedHandler.handle");
 		
 		// 현재 페이지가 정상 응답되는 페이지임을 지정하는 의미
     	response.setStatus(HttpServletResponse.SC_OK);

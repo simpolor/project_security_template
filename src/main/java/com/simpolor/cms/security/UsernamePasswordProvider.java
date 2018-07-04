@@ -27,9 +27,7 @@ public class UsernamePasswordProvider implements AuthenticationProvider{
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
-		logger.info("=========================================================");
-		logger.info("[R] AuthenticationProvider.authenticate");
-		logger.info("=========================================================");
+		logger.info("[M] UsernamePasswordProvider.authenticate");
 		
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
@@ -37,29 +35,18 @@ public class UsernamePasswordProvider implements AuthenticationProvider{
 		logger.info("-- authentication.getName() : {}", authentication.getName());
 		logger.info("-- authentication.getCredentials() : {}", authentication.getCredentials().toString());
 	
-		UserDetails userDetails;
-		//try {
-			userDetails = userService.loadUserByUsername(username);
+		UserDetails userDetails = userService.loadUserByUsername(username);
 			
-			logger.info("-- userDetails.getUsername() : {}", userDetails.getUsername());
-			logger.info("-- userDetails.getPassword() : {}", userDetails.getPassword());
-			logger.info("-- userDetails.getAuthorities() : {}", userDetails.getAuthorities());
-			
-			logger.info("-- password 비교 : {}", passwordEncrypt.matches(password, userDetails.getPassword()));
-			
-			if(!passwordEncrypt.matches(password, userDetails.getPassword())) {
-				throw new BadCredentialsException("The password does not match.");
-			}
-			
-			return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-			
-		/*} catch(UsernameNotFoundException e) { 
-			throw new UsernameNotFoundException("This username does not exist.");
-		} catch(BadCredentialsException e) { 
-			throw new BadCredentialsException(e.getMessage()); 
-		} catch(Exception e) { 
-			throw new RuntimeException(e.getMessage()); 
-		}*/
+		logger.info("-- userDetails.getUsername() : {}", userDetails.getUsername());
+		logger.info("-- userDetails.getPassword() : {}", userDetails.getPassword());
+		logger.info("-- userDetails.getAuthorities() : {}", userDetails.getAuthorities());
+		logger.info("-- password 비교 : {}", passwordEncrypt.matches(password, userDetails.getPassword()));
+		
+		if(!passwordEncrypt.matches(password, userDetails.getPassword())) {
+			throw new BadCredentialsException("The password does not match.");
+		}
+		
+		return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
 	}
 
 	@Override

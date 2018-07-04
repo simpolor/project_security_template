@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.access.service.AccessService;
-import com.simpolor.cms.security.SecurityMetadataSource;
 
 @Component
 public class SecureObjectAdapter {
@@ -28,9 +27,7 @@ public class SecureObjectAdapter {
 	
 	public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getRolesAndUrl(){
 
-		logger.info("=========================================================");
-		logger.info("[R] MatcherAdapter.getRolesAndUrl");
-		logger.info("=========================================================");
+		logger.info("[M] SecureObjectAdapter.getRolesAndUrl");
 		
 		LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourceMap = new LinkedHashMap<RequestMatcher, List<ConfigAttribute>>();
 		
@@ -52,8 +49,8 @@ public class SecureObjectAdapter {
 				accessUrl = access.getAccess_url();
 				accessResource = new AntPathRequestMatcher(accessUrl);
 				
-				System.out.println("accessUrl : "+access.getAccess_url());
-				System.out.println("accessRoles : "+access.getAccess_roles());
+				System.out.println("-- accessUrl : "+access.getAccess_url());
+				System.out.println("-- accessRoles : "+access.getAccess_roles());
 				
 				configList = new LinkedList<ConfigAttribute>();
 				

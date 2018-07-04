@@ -1,0 +1,4 @@
+cms: 
+  security: 
+    temp: true
+    message: thankyou

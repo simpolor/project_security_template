@@ -25,6 +25,8 @@ public class LogoutHandler implements LogoutSuccessHandler{
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		
+		logger.info("[M] LogoutHandler.onLogoutSuccess");
+		
 		// 현재 페이지가 정상 응답되는 페이지임을 지정하는 의미
 		response.setStatus(HttpServletResponse.SC_OK);
 		
