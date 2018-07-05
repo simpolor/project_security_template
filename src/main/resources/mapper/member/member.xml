@@ -4,32 +4,32 @@
 <mapper namespace="com.simpolor.cms.module.member.repository.MemberRepository">
 
 	<select id="selectMemberList" resultType="member"> 
-		SELECT member_id, member_name, member_email, regi_date, modi_date, del_yn 
+		SELECT member_id, member_name, member_email, member_roles, regi_date, modi_date, del_yn
 		  FROM member
 		 WHERE del_yn='N'
 	  ORDER BY member_id ASC
 	</select>
 	
 	<select id="selectMember" parameterType="String" resultType="member"> 
-		SELECT * 
+		SELECT member_id, member_pw, member_name, member_email, member_roles, regi_date, modi_date, del_yn
 		  FROM member 
 		 WHERE member_id = #{member_id} 
 	</select>
 	
-	<select id="selectMemberId" parameterType="String" resultType="int"> 
+	<select id="selecMemberIdCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) 
 		  FROM member 
 		 WHERE member_id = #{member_id} 
 	</select>
 	
 	<insert id="insertMember" parameterType="member"> 
-		INSERT INTO member (member_id, member_pw, member_name, member_email, regi_date) 
-		     VALUES (#{member_id}, #{member_pw}, #{member_name}, #{member_email}, now()) 
+		INSERT INTO member (member_id, member_pw, member_name, member_email, member_roles, regi_date)
+		     VALUES (#{member_id}, #{member_pw}, #{member_name}, #{member_email}, #{member_roles}, now())
 	</insert> 
 	
 	<update id="updateMember" parameterType="member"> 
 		UPDATE member 
-		   SET member_name=#{member_name}, member_email=#{member_email}, modi_date=now() 
+		   SET member_name=#{member_name}, member_email=#{member_email}, member_roles=#{member_roles}, modi_date=now()
 		 WHERE member_id=#{member_id} 
 	</update> 
 	

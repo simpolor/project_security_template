@@ -11,20 +11,8 @@ CREATE TABLE `member` (
 	`member_pw` VARCHAR(500) NOT NULL,
 	`member_name` VARCHAR(20) NULL DEFAULT NULL,
 	`member_email` VARCHAR(50) NULL DEFAULT NULL,
+	`member_roles` VARCHAR(50) NULL DEFAULT NULL,
 	`regi_date` DATETIME NULL DEFAULT NULL,
-	`modi_date` DATETIME NULL DEFAULT NULL,
-	`del_yn` CHAR(1) NULL DEFAULT 'N',
-	PRIMARY KEY (`member_id`)
-);
-
-CREATE TABLE `member_role` (
-	`member_id` VARCHAR(20) NOT NULL,
-	`member_roles` VARCHAR(50) NOT NULL,
-	`regi_id` VARCHAR(20) NULL DEFAULT NULL,
-	`regi_name` VARCHAR(50) NULL DEFAULT NULL,
-	`regi_date` DATETIME NULL DEFAULT NULL,
-	`modi_id` VARCHAR(20) NULL DEFAULT NULL,
-	`modi_name` VARCHAR(50) NULL DEFAULT NULL,
 	`modi_date` DATETIME NULL DEFAULT NULL,
 	`del_yn` CHAR(1) NULL DEFAULT 'N',
 	PRIMARY KEY (`member_id`)

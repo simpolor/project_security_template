@@ -9,6 +9,7 @@
 
 
 개발처리된 항목
+- 전반적인 Role, Access, Member에 대한 소스정리
 - 접근관리 수정 후 MetaSoruce갱신 작업
 
 

@@ -45,7 +45,7 @@
 							<td>${list.modi_date}</td>
 							<td>${list.del_yn}</td>
 							<td><button onclick="f_move('${pageContext.request.contextPath}/access/modify/${list.access_seq}')">수정</button></td>
-							<td><button onclick="f_move('${pageContext.request.contextPath}/access/delete/${list.access_seq}')">삭제</button></td>
+							<td><%--<button onclick="f_move('${pageContext.request.contextPath}/access/delete/${list.access_seq}')">삭제</button>--%></td>
 						</tr>
 					</c:forEach>
 				</c:when>

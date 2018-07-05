@@ -26,8 +26,8 @@ public class MemberService  {
 		return memberRepository.selectMember(member_id); 
 	} 
 
-	public int checkMemberId(String member_id) {
-		return memberRepository.selectMemberId(member_id);
+	public int isMemberId(String member_id) {
+		return memberRepository.selecMemberIdCheck(member_id);
 	}
 	
 	public int registerMember(Member member) { 

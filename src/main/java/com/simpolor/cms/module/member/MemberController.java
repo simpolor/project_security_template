@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.simpolor.cms.common.util.StringUtil;
-import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.member.domain.Member;
-import com.simpolor.cms.module.member.domain.MemberRole;
-import com.simpolor.cms.module.member.service.MemberRoleService;
 import com.simpolor.cms.module.member.service.MemberService;
-import com.simpolor.cms.module.role.domain.Role;
 
 @Controller
 public class MemberController {
@@ -29,9 +25,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@Autowired
-	private MemberRoleService memberRoleService;
-	
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public ModelAndView memberLogin(ModelAndView mav, HttpServletRequest request) {
 		
@@ -49,7 +42,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping( value="/member/register", method=RequestMethod.GET)
-	public ModelAndView memberJoinForm(ModelAndView mav) {
+	public ModelAndView memberRegisterForm(ModelAndView mav) {
 		
 		mav.setViewName("module/member/memberRegister");
 		
@@ -57,7 +50,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping( value="/member/register", method=RequestMethod.POST)
-	public ModelAndView memberJoin(ModelAndView mav, Member member) {
+	public ModelAndView memberRegister(ModelAndView mav, Member member) {
 
 		System.out.println("/member/register : POST");
 		
@@ -78,19 +71,11 @@ public class MemberController {
 			return mav;
 		}
 		
-		System.out.println("StringUtil.isEquals(memberPw, memberPwConfirm) : "+StringUtil.isEquals(memberPw, memberPwConfirm));
 		if(StringUtil.isEquals(memberPw, memberPwConfirm)) {
-			System.out.println("memberService.checkMemberId(memberId) : "+memberService.checkMemberId(memberId));
-			if(memberService.checkMemberId(memberId) == 0) {
+			if(memberService.isMemberId(memberId) == 0) {
+				member.setMember_roles("USER");
 				int result = memberService.registerMember(member);
 				if(result > 0) {
-					MemberRole memberRole = new MemberRole();
-					memberRole.setMember_id(memberId);
-					memberRole.setMember_roles("USER");
-					memberRole.setRegi_id(memberId);
-					memberRole.setRegi_name(memberName);
-					memberRoleService.registerMemberRole(memberRole);
-
 					mav.setViewName("redirect:/member/registerComplete");
 					return mav;
 				}
@@ -103,7 +88,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping( value="/member/registerComplete", method=RequestMethod.GET)
-	public ModelAndView memberComplete(ModelAndView mav) {
+	public ModelAndView memberRegisterComplete(ModelAndView mav) {
 		
 		mav.setViewName("module/member/memberRegisterComplete");
 		
@@ -131,7 +116,7 @@ public class MemberController {
 		
 		Member member = memberService.getMember(member_id);
 		
-		mav.addObject("Member", member);
+		mav.addObject("member", member);
 		mav.setViewName("module/member/memberInfo");
 		
 		return mav;
@@ -141,8 +126,8 @@ public class MemberController {
 	public ModelAndView memberModifyForm(ModelAndView mav, @PathVariable String member_id) {
 		
 		Member member = memberService.getMember(member_id);
-		
-		mav.addObject("Member", member);
+
+		mav.addObject("member", member);
 		mav.setViewName("module/member/memberModify");
 		
 		return mav;
@@ -158,8 +143,11 @@ public class MemberController {
 		logger.info("> member_email : "+member.getMember_email());
 		
 		member.setMember_id(member_id);
-		if(memberService.modifyMember( member) > 0) mav.setViewName("redirect:/member/list");
-		else mav.setViewName("module/member/memberModify");
+		if(memberService.modifyMember( member) > 0){
+			mav.setViewName("redirect:/member/list");
+		}else{
+			mav.setViewName("module/member/memberModify");
+		}
 		
 		return mav;
 	}

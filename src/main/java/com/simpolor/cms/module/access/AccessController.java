@@ -52,9 +52,6 @@ public class AccessController {
 		
 		logger.info("[M] Access Register Form");
 
-		logger.info("access_url : "+access.getAccess_url());
-		logger.info("access_roles : "+access.getAccess_roles());
-
 		List<Role> roleList = roleService.getRoleList();
 
 		mav.addObject("roleList", roleList);
@@ -68,17 +65,10 @@ public class AccessController {
 		
 		logger.info("[M] Access Register Process");
 
-
-		String accessUrl = access.getAccess_url();
-		String accessRoles = access.getAccess_roles();
-
-		logger.info("access_url : "+access.getAccess_url());
-		logger.info("access_roles : "+access.getAccess_roles());
-		
 		access.setRegi_id("admin");
 		access.setRegi_name("관리자");
 
-		if(accessService.isAccessUrl(accessUrl) == 0) {
+		if(accessService.isAccessUrl(access.getAccess_url()) == 0) {
 			if (accessService.registerAccess(access) > 0) {
 				SecurityMetadataSource.reload();
 				mav.setViewName("redirect:/access/list");

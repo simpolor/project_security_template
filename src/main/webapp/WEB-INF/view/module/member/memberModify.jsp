@@ -22,20 +22,24 @@
 <body>
 	<h1>Memer Modify</h1>
 	
-	<form id="memberModifyForm" action="/member/modify/${Member.member_id}" method="post"> 
+	<form id="memberModifyForm" action="/member/modify/${member.member_id}" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<table>
 			<tr>
 				<td><label for="member_id">아이디</label></td>
-				<td><input type="text" name="member_id" id="member_id" value="${Member.member_id}" disabled="disabled" /></td>
+				<td><input type="text" name="member_id" id="member_id" value="${member.member_id}" disabled="disabled" /></td>
 			</tr>
 			<tr>
 				<td><label for="member_name">이름</label></td>
-				<td><input type="text" name="member_name" id="member_name" value="${Member.member_name}" placeholder="이름" /></td>
+				<td><input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름" /></td>
 			</tr>
 			<tr>
 				<td><label for="member_email">이메일</label></td>
-				<td><input type="text" name="member_email" id="member_email" value="${Member.member_email}" placeholder="이메일" /></td>
+				<td><input type="text" name="member_email" id="member_email" value="${member.member_email}" placeholder="이메일" /></td>
+			</tr>
+			<tr>
+				<td><label for="member_roles">권한</label></td>
+				<td><input type="text" name="member_roles" id="member_roles" value="${member.member_roles}" placeholder="권한" /></td>
 			</tr>
 		</table>
 	</form>
@@ -43,7 +47,7 @@
 	<hr>
 	
 		<button onclick="f_submit()">수정</button>
-	<button onclick="f_move('${pageContext.request.contextPath}/list')">뒤로가기</button>
+	<button onclick="f_move('${pageContext.request.contextPath}/member/list')">뒤로가기</button>
 	 
 </body>
 </html>

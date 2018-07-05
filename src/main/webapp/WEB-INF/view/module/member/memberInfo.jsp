@@ -20,20 +20,24 @@
 
 	<table>
 		<tr>
-			<td><label for="member_id">아이디</label></td>
-			<td>${Member.member_id}</td>
+			<th>아이디</th>
+			<td>${member.member_id}</td>
 		</tr>
 		<tr>
-			<td><label for="member_pw">비밀번호</label></td>
-			<td>${Member.member_pw}</td>
+			<th>비밀번호</th>
+			<td>${member.member_pw}</td>
 		</tr>
 		<tr>
-			<td><label for="member_name">이름</label></td>
-			<td>${Member.member_name}</td>
+			<th>이름</th>
+			<td>${member.member_name}</td>
 		</tr>
 		<tr>
-			<td><label for="member_email">이메일</label></td>
-			<td>${Member.member_email}</td>
+			<th>이메일</th>
+			<td>${member.member_email}</td>
+		</tr>
+		<tr>
+			<th>권한</th>
+			<td>${member.member_roles}</td>
 		</tr>
 	</table>
 	

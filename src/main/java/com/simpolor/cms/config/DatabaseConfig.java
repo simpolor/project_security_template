@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.demo.domain.Demo;
 import com.simpolor.cms.module.member.domain.Member;
-import com.simpolor.cms.module.member.domain.MemberRole;
 import com.simpolor.cms.module.role.domain.Role;
 import com.simpolor.cms.security.domain.Token;
 
@@ -41,7 +40,6 @@ public class DatabaseConfig {
         sessionFactory.setTypeAliases(new Class[] {
         		Demo.class,
         		Member.class,
-        		MemberRole.class,
         		Role.class,
         		Access.class,
         		Token.class

@@ -24,6 +24,7 @@
 				<th>Member Id</th>
 				<th>Member Name</th>
 				<th>Member Email</th>
+				<th>Member Roles</th>
 				<th>Regi Date</th>
 				<th>Modi Date</th>
 				<th></th>
@@ -39,6 +40,7 @@
 							<td>${list.member_id}</td>
 							<td>${list.member_name}</td>
 							<td>${list.member_email}</td>
+							<td>${list.member_roles}</td>
 							<td>${list.regi_date}</td>
 							<td>${list.modi_date}</td>
 							<td><button onclick="f_move('${pageContext.request.contextPath}/member/modify/${list.member_id}')">수정</button></td>
@@ -48,7 +50,7 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="7">Empty</td>
+						<td colspan="8">Empty</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
