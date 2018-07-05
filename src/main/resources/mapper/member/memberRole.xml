@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simpolor.cms.module.member.repository.MemberRoleRepository">
+
+	<select id="selectMemberRole" parameterType="String" resultType="memberRole">
+		SELECT member_roles
+		  FROM member_role 
+		 WHERE member_id = #{member_id} 
+	</select>
+	
+	<insert id="insertMemberRole" parameterType="memberRole"> 
+		INSERT INTO member_role (member_id, member_roles, regi_id, regi_name, regi_date) 
+		VALUES (#{member_id}, #{member_roles}, #{regi_id}, #{regi_name}, now()) 
+	</insert> 
+	
+	<update id="updateMemberRole" parameterType="memberRole"> 
+		UPDATE member_role 
+		   SET member_roles=#{member_roles}, moid_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now() 
+		 WHERE member_id=#{member_id} 
+	</update> 
+	
+	<update id="deleteMemberRole" parameterType="memberRole"> 
+		UPDATE member_role 
+		   SET modi_id=#{modi_id}, modi_name=#{modi_name}, modi_date=now(), del_yn='Y'
+		 WHERE member_id=#{member_id} 
+	</update> 
+	
+	<!-- <delete id="deleteMemberRole" parameterType="String"> 
+		DELETE FROM member_role 
+		      WHERE member_id = #{member_id} 
+	</delete> --> 
+
+
+</mapper>
