@@ -33,6 +33,26 @@
 				<td><label for="access_roles">Access Roles : </label></td>
 				<td><input type="text" name="access_roles" id="access_roles" value="${access.access_roles}" /></td>
 			</tr>
+			<tr>
+				<td><label for="access_roles">Del Yn : </label></td>
+				<td>
+					<c:choose>
+						<c:when test="${'Y' eq access.del_yn}">
+							<label for="del_yn1">Y</label>
+							<input type="radio" name="del_yn" id="del_yn1" value="Y" checked />
+							<label for="del_yn2">N</label>
+							<input type="radio" name="del_yn" id="del_yn2" value="N" />
+						</c:when>
+						<c:otherwise>
+							<label for="del_yn1">Y</label>
+							<input type="radio" name="del_yn" id="del_yn1" value="Y" />
+							<label for="del_yn2">N</label>
+							<input type="radio" name="del_yn" id="del_yn2" value="N" checked />
+						</c:otherwise>
+					</c:choose>
+
+				</td>
+			</tr>
 		</table>
 	</form>
 

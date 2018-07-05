@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.access.service.AccessService;
@@ -47,9 +48,12 @@ public class AccessController {
 	}
 	
 	@RequestMapping( value="/access/register", method=RequestMethod.GET)
-	public ModelAndView accessRegisterForm(ModelAndView mav) {
+	public ModelAndView accessRegisterForm(ModelAndView mav, Access access) {
 		
 		logger.info("[M] Access Register Form");
+
+		logger.info("access_url : "+access.getAccess_url());
+		logger.info("access_roles : "+access.getAccess_roles());
 
 		List<Role> roleList = roleService.getRoleList();
 
@@ -60,23 +64,31 @@ public class AccessController {
 	}
 	
 	@RequestMapping( value="/access/register", method=RequestMethod.POST)
-	public ModelAndView accessRegister(ModelAndView mav, Access access) {
+	public ModelAndView accessRegister(ModelAndView mav, RedirectAttributes redirectAttributes, Access access) {
 		
 		logger.info("[M] Access Register Process");
-		
+
+
+		String accessUrl = access.getAccess_url();
+		String accessRoles = access.getAccess_roles();
+
 		logger.info("access_url : "+access.getAccess_url());
 		logger.info("access_roles : "+access.getAccess_roles());
 		
 		access.setRegi_id("admin");
 		access.setRegi_name("관리자");
-		
-		if(accessService.registerAccess(access) > 0){
-			SecurityMetadataSource.reload();
-			mav.setViewName("redirect:/access/list");
-		}else{
-			mav.setViewName("module/access/accessRegister");
+
+		if(accessService.isAccessUrl(accessUrl) == 0) {
+			if (accessService.registerAccess(access) > 0) {
+				SecurityMetadataSource.reload();
+				mav.setViewName("redirect:/access/list");
+				return mav;
+			}
 		}
-		
+
+		redirectAttributes.addFlashAttribute("access", access);
+
+		mav.setViewName("redirect:/access/register");
 		return mav;
 	}
 		
@@ -101,6 +113,7 @@ public class AccessController {
 		logger.info("-- access_seq : "+access_seq);
 		logger.info("-- access_url : "+access.getAccess_url());
 		logger.info("-- access_roles : "+access.getAccess_roles());
+		logger.info("-- del_yn : "+access.getDel_yn());
 		
 		access.setAccess_seq(access_seq);
 		access.setModi_id("admin");

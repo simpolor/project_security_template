@@ -80,6 +80,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		for(Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet() ){
 			// entry.getKey() : Ant [pattern='/admin/home']
 			logger.info("-- entry.getKey() : "+entry.getKey());
+			logger.info("-- entry.getKey().matches(request) : "+entry.getKey().matches(request));
 			if(entry.getKey().matches(request)){
 				logger.info("-- entry.getValue() : "+entry.getValue());
 				return entry.getValue();

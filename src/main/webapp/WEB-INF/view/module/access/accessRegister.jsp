@@ -27,11 +27,11 @@
 		<table>
 			<tr>
 				<td><label for="access_url">ACCESS URL : </label></td>
-				<td><input type="text" name="access_url" id="access_url" /></td>
+				<td><input type="text" name="access_url" id="access_url" value="${access.access_url}" /></td>
 			</tr>
 			<tr>
 				<td><label for="access_url">ACCESS ROLES : </label></td>
-				<td><input type="text" name="access_roles" id="access_roles" /></td>
+				<td><input type="text" name="access_roles" id="access_roles" value="${access.access_roles}" /></td>
 			</tr>
 		</table>
 	</form>

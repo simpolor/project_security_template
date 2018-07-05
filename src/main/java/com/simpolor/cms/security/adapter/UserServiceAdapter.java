@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.simpolor.cms.common.util.StringUtil;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.domain.MemberRole;
+import com.simpolor.cms.module.member.service.MemberRoleService;
 import com.simpolor.cms.module.member.service.MemberService;
 import com.simpolor.cms.security.service.UserService;
 
@@ -26,6 +27,9 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private MemberRoleService memberRoleService;
 	
 	public User getUser(String username) {
 		Member member = memberService.getMember(username);
@@ -48,10 +52,10 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	public Collection<GrantedAuthority> getGrantedAuthorities(String username) {
 		
-		MemberRole memberRole = memberService.getMemberRole(username);
+		MemberRole memberRole = memberRoleService.getMemberRole(username);
 			
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		if(!StringUtil.isEmpty(memberRole.getMember_roles())) {
+		if(memberRole != null && !StringUtil.isEmpty(memberRole.getMember_roles())) {
 			String[] memberRoleList = memberRole.getMember_roles().split(",");
 			if(memberRoleList != null) {
 				for(String role : memberRoleList) {

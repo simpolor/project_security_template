@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.simpolor.cms.common.util.StringUtil;
 import com.simpolor.cms.module.access.domain.Access;
 import com.simpolor.cms.module.member.domain.Member;
+import com.simpolor.cms.module.member.domain.MemberRole;
+import com.simpolor.cms.module.member.service.MemberRoleService;
 import com.simpolor.cms.module.member.service.MemberService;
 import com.simpolor.cms.module.role.domain.Role;
 
@@ -25,7 +27,10 @@ public class MemberController {
 	final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
+
+	@Autowired
+	private MemberRoleService memberRoleService;
 	
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public ModelAndView memberLogin(ModelAndView mav, HttpServletRequest request) {
@@ -79,6 +84,13 @@ public class MemberController {
 			if(memberService.checkMemberId(memberId) == 0) {
 				int result = memberService.registerMember(member);
 				if(result > 0) {
+					MemberRole memberRole = new MemberRole();
+					memberRole.setMember_id(memberId);
+					memberRole.setMember_roles("USER");
+					memberRole.setRegi_id(memberId);
+					memberRole.setRegi_name(memberName);
+					memberRoleService.registerMemberRole(memberRole);
+
 					mav.setViewName("redirect:/member/registerComplete");
 					return mav;
 				}

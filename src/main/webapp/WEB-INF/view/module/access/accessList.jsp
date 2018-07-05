@@ -26,6 +26,8 @@
 				<th>Access Roles</th>
 				<th>Regi Date</th>
 				<th>Modi Date</th>
+				<th>Del Yn</th>
+				<th></th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -41,6 +43,7 @@
 							<td>${list.access_roles}</td>
 							<td>${list.regi_date}</td>
 							<td>${list.modi_date}</td>
+							<td>${list.del_yn}</td>
 							<td><button onclick="f_move('${pageContext.request.contextPath}/access/modify/${list.access_seq}')">수정</button></td>
 							<td><button onclick="f_move('${pageContext.request.contextPath}/access/delete/${list.access_seq}')">삭제</button></td>
 						</tr>
@@ -48,7 +51,7 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="7">Empty</td>
+						<td colspan="8">Empty</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
