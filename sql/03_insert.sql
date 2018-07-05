@@ -20,6 +20,6 @@ INSERT INTO role(role_code, role_name, regi_id, regi_name, regi_date, del_yn)
      VALUES ('ADMIN', '관리자', 'admin', '관리자', now(), 'N');
 
 INSERT INTO access(access_url, access_roles, regi_id, regi_name, regi_date, del_yn)
-     VALUES ('/member/info', 'USER', '관리자', now(), 'N');
+     VALUES ('/member/info', 'USER', 'admin', '관리자', now(), 'N');
 INSERT INTO access(access_url, access_roles, regi_id, regi_name, regi_date, del_yn)
-     VALUES ('/admin/home', 'USER, ADMIN', '관리자', now(), 'N');
+     VALUES ('/admin/home', 'USER, ADMIN', 'admin','관리자', now(), 'N');
