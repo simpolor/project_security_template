@@ -45,7 +45,7 @@
 	</delete>  -->
 	
 	<select id="selectMemberRole" parameterType="String" resultType="memberRole">
-		SELECT member_role 
+		SELECT member_roles
 		  FROM member_role 
 		 WHERE member_id = #{member_id} 
 	</select>
