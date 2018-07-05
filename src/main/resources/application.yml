@@ -1,4 +1,6 @@
-cms: 
-  security: 
-    temp: true
-    message: thankyou
+cms:
+
+
+---
+security:
+  isOtherPermitAll: true

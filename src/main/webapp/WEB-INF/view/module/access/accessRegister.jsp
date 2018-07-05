@@ -26,17 +26,31 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<table>
 			<tr>
-				<td><label for="access_url">ACCESS URL</label></td>
+				<td><label for="access_url">ACCESS URL : </label></td>
 				<td><input type="text" name="access_url" id="access_url" /></td>
 			</tr>
 			<tr>
-				<td><label for="access_url">ACCESS ROLES</label></td>
+				<td><label for="access_url">ACCESS ROLES : </label></td>
 				<td><input type="text" name="access_roles" id="access_roles" /></td>
 			</tr>
 		</table>
 	</form>
-	
-	<hr> 
+
+
+	<c:if test="${! empty roleList}">
+	<hr />
+
+	<table>
+		<c:forEach var="role" items="${roleList}">
+		<tr>
+			<td>${role.role_code}</td>
+			<td>${role.role_name}</td>
+		</tr>
+		</c:forEach>
+	</table>
+	</c:if>
+
+	<hr />
 	
 	<button onclick="f_submit()">등록</button>
 	<button onclick="f_move('${pageContext.request.contextPath}/access/list')">뒤로가기</button>

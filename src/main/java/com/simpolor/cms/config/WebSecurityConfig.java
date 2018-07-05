@@ -64,14 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http
-			// URL에 따른 권한 체크 
-			.authorizeRequests()
-				// .antMatchers("/", "/index", "/main", "/main/index").permitAll()
-				// .antMatchers("/member/login").permitAll()
-				.anyRequest().authenticated()
-				
 			// 로그인 설정
-			.and() 
 			.formLogin()
 				.loginPage("/member/login") // 로그인 페이지 ( 컨트롤러를 매핑하지 않으면 기본 제공 로그인 페이지 호출 )
 				.loginProcessingUrl("/member/login") // 로그인 프로세스 처리할 URL

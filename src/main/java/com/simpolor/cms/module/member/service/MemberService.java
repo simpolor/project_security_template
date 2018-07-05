@@ -46,25 +46,5 @@ public class MemberService  {
 	public int deleteMember(String member_id) { 
 		return memberRepository.deleteMember(member_id); 
 	} 
-	
-	public MemberRole getMemberRole(String member_id) {
-		return memberRepository.selectMemberRole(member_id); 
-	}
 
-	public int registerMemberRole(MemberRole memberRole) {
-		return memberRepository.insertMemberRole(memberRole); 
-	}
-	
-	public int modifyMemberRole(MemberRole memberRole) {
-		return memberRepository.insertMemberRole(memberRole); 
-	}
-
-	public int deleteMemberRole(MemberRole memberRole) {
-		return memberRepository.deleteMemberRole(memberRole); 
-		
-	}
-	
-	
-	
-	
 }

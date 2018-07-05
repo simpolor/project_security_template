@@ -34,7 +34,7 @@
 				<td><input type="password" name="member_pw" id="member_pw" placeholder="비밀번호" required /></td>
 			</tr>
 			<tr>
-				<td><label for="password">비밀번호 확인</label></td>
+				<td><label for="member_pw_confirm">비밀번호 확인</label></td>
 				<td><input type="password" name="member_pw_confirm" id="member_pw_confirm" placeholder="비밀번호 확인" required /></td>
 			</tr>
 			<tr>

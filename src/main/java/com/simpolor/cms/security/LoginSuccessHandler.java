@@ -89,7 +89,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     	}
     	
     	// 아무것도 존재하지 않을 경우 기본 페이지 호출
-    	String defaultUrl = "/index";
+    	String defaultUrl = "/";
     	if(defaultUrl != null && !defaultUrl.equals("")) {
     		logger.info("-- defaultUrl : {}", defaultUrl);
     		redirectStrategy.sendRedirect(request, response, defaultUrl);

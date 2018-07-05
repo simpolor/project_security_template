@@ -1,6 +1,8 @@
 package com.simpolor.cms.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.AnyRequestMatcher;
@@ -73,23 +76,15 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
 		logger.info("-- request.getRequestURI : {}", request.getRequestURI());
 		logger.info("-- request.getRequestURI() : {}", httpUrl);
 		logger.info("-- request.getMethod : {}", httpMethod);
-		
-		for( Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet() ) {
+
+		for(Entry<RequestMatcher, List<ConfigAttribute>> entry : resourceMap.entrySet() ){
 			// entry.getKey() : Ant [pattern='/admin/home']
 			logger.info("-- entry.getKey() : "+entry.getKey());
 			if(entry.getKey().matches(request)){
 				logger.info("-- entry.getValue() : "+entry.getValue());
-				//configAttributes  = entry.getValue();
-				//break;
 				return entry.getValue();
 			}
 		}
-		//logger.info("-- configAttributes  : {}", configAttributes );
-		
-		//return SecurityConfig.createList("DEFAULT");
-		// return SecurityConfig.createList("isAuthenticated()");
-		//return configAttributes ;
-		RequestMatcher anyRequest = AnyRequestMatcher.INSTANCE;
 		return null;
 	}
 
