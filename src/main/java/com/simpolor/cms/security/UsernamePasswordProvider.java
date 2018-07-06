@@ -8,9 +8,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.simpolor.cms.security.domain.User;
 import com.simpolor.cms.security.service.UserService;
 
 @Component
@@ -36,6 +38,7 @@ public class UsernamePasswordProvider implements AuthenticationProvider{
 		logger.info("-- authentication.getCredentials() : {}", authentication.getCredentials().toString());
 	
 		UserDetails userDetails = userService.loadUserByUsername(username);
+		//User userDetails = userService.loadUserByUsername(username);
 			
 		logger.info("-- userDetails.getUsername() : {}", userDetails.getUsername());
 		logger.info("-- userDetails.getPassword() : {}", userDetails.getPassword());
@@ -47,6 +50,7 @@ public class UsernamePasswordProvider implements AuthenticationProvider{
 		}
 		
 		return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+		//return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
 	}
 
 	@Override

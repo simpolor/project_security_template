@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"  %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,5 +27,14 @@
 	<a href="/demo2">데모2</a><br />
 	<hr />
 	<a href="/member/logout">로그아웃</a><br />
+
+	<sec:authorize access="isAnonymous()">
+		<a href="/member/login">로그인</a>
+	</sec:authorize>
+
+	<sec:authorize access="isAuthenticated()">
+		<a href="/member/logout">로그아웃</a>
+	</sec:authorize>
+
 </body>
 </html>

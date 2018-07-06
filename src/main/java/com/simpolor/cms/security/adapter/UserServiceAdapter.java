@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.simpolor.cms.common.util.StringUtil;
 import com.simpolor.cms.module.member.domain.Member;
 import com.simpolor.cms.module.member.service.MemberService;
+//import com.simpolor.cms.security.domain.User;
 import com.simpolor.cms.security.service.UserService;
 
 @Component
@@ -35,13 +36,15 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 			String memberId = member.getMember_id();
 			//String memberPw = customPasswordEncoder.encode(member.getMember_pw());
 			String memberPw = member.getMember_pw();
+			String memberName = member.getMember_name();
+			String memberEmail = member.getMember_email();
 			String memberRoles = member.getMember_roles();
 
 			logger.info("-- memberId : "+memberId);
 			logger.info("-- memberPw : "+memberPw);
 			logger.info("-- memberRoles : "+memberPw);
 
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+			List grantedAuthorities = new ArrayList<GrantedAuthority>();
 			if(memberRoles != null && !StringUtil.isEmpty(memberRoles)){
 				String[] memberRoleSplit = memberRoles.split(",");
 				for(String role : memberRoleSplit) {
@@ -50,6 +53,7 @@ final Logger logger = LoggerFactory.getLogger(UserService.class);
 				}
 			}
 
+			//return new User(memberId, memberPw, memberName, memberEmail, grantedAuthorities);
 			return new User(memberId, memberPw, grantedAuthorities);
 
 		}else {
