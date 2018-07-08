@@ -28,7 +28,7 @@ public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 			throws AccessDeniedException, InsufficientAuthenticationException {
 		
 		logger.info("[M] LogicalOrAccessDecisionManager.decide");
-		
+		logger.info("-- configAttributes : {}", configAttributes);
 		// 해당 URL에 대한 권한 정보가 없다면 무조건 통과 
 		if (configAttributes == null || configAttributes.size() <= 0) {
             return;
@@ -41,12 +41,11 @@ public class LogicalOrAccessDecisionManager implements AccessDecisionManager {
 		while(cas.hasNext()) {
 			ConfigAttribute ca = cas.next();
 			
-			String role = ((SecurityConfig) ca).getAttribute(); // URL에 대한 권한을 가져옴
+			String accessRoles = ((SecurityConfig) ca).getAttribute(); // URL에 대한 권한을 가져옴
 			for (GrantedAuthority ga : authentication.getAuthorities()) { // 사용자가 가지고 있는 권한을 반복문 실행
-				if (role.equals(ga.getAuthority())) { // 사용자 권한과 매핑정보를 비교
-					logger.info("-- role : {}", role);
-					logger.info("-- ga.getAuthority() {}: ", ga.getAuthority());
-					
+				logger.info("-- accessRoles : {}", accessRoles);
+				logger.info("-- ga.getAuthority() : {}", ga.getAuthority());
+				if (accessRoles.contains(ga.getAuthority())) { // 사용자 권한과 매핑정보를 비교
 					return;
 				}
 			}

@@ -56,7 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		// 필터 적용을 제외할 URL 
 		web.ignoring().antMatchers("/resources/**");
 		web.ignoring().antMatchers("/css/**", "/script/**", "/image/**", "/fonts/**");
-		web.ignoring().antMatchers("/", "/index", "/main", "/main/index");
 	}
 	
 	/**

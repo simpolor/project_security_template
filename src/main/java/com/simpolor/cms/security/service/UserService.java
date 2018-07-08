@@ -3,13 +3,12 @@ package com.simpolor.cms.security.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.simpolor.cms.security.adapter.UserServiceAdapter;
-//import com.simpolor.cms.security.domain.User;
+import com.simpolor.cms.security.domain.User;
 
 @Component
 public class UserService implements UserDetailsService {
@@ -22,10 +21,7 @@ public class UserService implements UserDetailsService {
 	@Override
 	public User loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		logger.info("=========================================================");
-		logger.info("[R] CustomUserDetailsService.loadUserByUsername");
-		logger.info("=========================================================");
-		
+		logger.info("[M] CustomUserDetailsService.loadUserByUsername");
 		logger.info("-- username : {}", username);
 		
 		return userServiceAdapter.getUser(username);

@@ -22,8 +22,8 @@ public class MainController {
 	@RequestMapping({"/", "/index", "/main", "/main/index"})
 	public String index(HttpServletRequest request, Principal principal) {
 
-		System.out.println("appProperty.isOtherPermitAll : "+securityProperty.isOtherPermitAll());
-
+		System.out.println("appProperty.isOtherPermitAll : "+securityProperty.isOtherPermitAll());			
+		System.out.println("SecurityContext.isAuthenticated() : "+SecurityContext.isAuthenticated());
 		if(SecurityContext.isAuthenticated()){
             User user = SecurityContext.getPrincipal();
             System.out.println("getUsername : "+user.getUsername());

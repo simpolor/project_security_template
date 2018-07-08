@@ -7,7 +7,7 @@ import com.simpolor.cms.security.domain.User;
 
 public final class SecurityContext {
 
-    private final static Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	private static Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     public static User getPrincipal() {
         if(authentication != null && authentication.isAuthenticated()){
@@ -22,9 +22,6 @@ public final class SecurityContext {
     }
 
     public static boolean isAuthenticated(){
-        System.out.println("authentication : "+authentication);
-        // System.out.println("authentication.getName() : "+authentication.getName());
-        // System.out.println("isAnonymousUser(authentication.getName() : "+isAnonymousUser(authentication.getName()));
         if(authentication != null && !isAnonymousUser(authentication.getName()) ){
             return authentication.isAuthenticated();
         }

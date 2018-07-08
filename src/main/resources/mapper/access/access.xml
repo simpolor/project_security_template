@@ -6,6 +6,7 @@
 	<select id="selectAccessList" resultType="access"> 
 		SELECT access_seq, access_url, access_roles, regi_id, regi_name, regi_date, modi_id, modi_id, modi_name, modi_date, del_yn 
 		  FROM access
+		 WHERE del_yn='N'
 	  ORDER BY access_url ASC
 	</select>
 	

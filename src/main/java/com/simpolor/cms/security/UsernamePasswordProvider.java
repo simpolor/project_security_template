@@ -8,7 +8,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -37,20 +36,21 @@ public class UsernamePasswordProvider implements AuthenticationProvider{
 		logger.info("-- authentication.getName() : {}", authentication.getName());
 		logger.info("-- authentication.getCredentials() : {}", authentication.getCredentials().toString());
 	
-		UserDetails userDetails = userService.loadUserByUsername(username);
-		//User userDetails = userService.loadUserByUsername(username);
+		User user = userService.loadUserByUsername(username);
 			
-		logger.info("-- userDetails.getUsername() : {}", userDetails.getUsername());
-		logger.info("-- userDetails.getPassword() : {}", userDetails.getPassword());
-		logger.info("-- userDetails.getAuthorities() : {}", userDetails.getAuthorities());
-		logger.info("-- password 비교 : {}", passwordEncrypt.matches(password, userDetails.getPassword()));
+		logger.info("-- user.getUsername() : {}", user.getUsername());
+		logger.info("-- user.getPassword() : {}", user.getPassword());
+		logger.info("-- user.getAuthorities() : {}", user.getAuthorities());
+		logger.info("-- user.getIdentity() : {}", user.getIdentity());
+		logger.info("-- user.getName() : {}", user.getName());
+		logger.info("-- user.getEmail() : {}", user.getEmail());
+		logger.info("-- password 비교 : {}", passwordEncrypt.matches(password, user.getPassword()));
 		
-		if(!passwordEncrypt.matches(password, userDetails.getPassword())) {
+		if(!passwordEncrypt.matches(password, user.getPassword())) {
 			throw new BadCredentialsException("The password does not match.");
 		}
 		
-		return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-		//return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
 	}
 
 	@Override
