@@ -2,16 +2,16 @@
 개발 리스트
 ---------------------------------
 개발해야할 목록
-- JSP에서 security 관련하여 tag library 사용하기
-- 전체적인 소스에 대한 리펙토링
 - Method에 따른 접근권한 관리
 - RoleHierarchy를 통한 권한간에 상하위 개념을 도입
+- 전체적인 소스에 대한 리펙토링
 
 
 개발처리된 항목
 - 사용자 세션관리 ( 세션이 아닌 Authentication의 Principal로 관리되어짐 )
 - 전반적인 Role, Access, Member에 대한 소스정리
 - 접근관리 수정 후 MetaSoruce갱신 작업
+- JSP에서 security 관련하여 tag library 사용하기
 
 
 미래에 해야할 목록
