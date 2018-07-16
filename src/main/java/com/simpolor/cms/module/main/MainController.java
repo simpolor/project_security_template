@@ -5,7 +5,9 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,8 +24,10 @@ public class MainController {
 	@RequestMapping({"/", "/index", "/main", "/main/index"})
 	public String index(HttpServletRequest request, Principal principal) {
 
-		System.out.println("appProperty.isOtherPermitAll : "+securityProperty.isOtherPermitAll());			
-		System.out.println("SecurityContext.isAuthenticated() : "+SecurityContext.isAuthenticated());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("authentication : "+authentication.getName());
+
+		/*  System.out.println("SecurityContext.isAuthenticated() : "+SecurityContext.isAuthenticated());
 		if(SecurityContext.isAuthenticated()){
             User user = SecurityContext.getPrincipal();
             System.out.println("getUsername : "+user.getUsername());
@@ -35,7 +39,7 @@ public class MainController {
             for(GrantedAuthority ga : user.getAuthorities()){
                 System.out.println("getAuthority : "+ga.getAuthority());
             }
-        }
+        } */
 
 		return "module/main/index";
 	}
